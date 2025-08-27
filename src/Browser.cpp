@@ -60,6 +60,8 @@ void Browser::closeTab(int index)
     // or else set it to min of index and tabs size
     ////min() - casting tabs.size() from size_t to int
     currentTabIndex = (tabs.empty()) ? -1 : min(index, (int)tabs.size());
+
+    //! the history/ .txt files will not be pointing to correct tabs after closing tab
 }
 
 Tab *Browser::getCurrentTab()
