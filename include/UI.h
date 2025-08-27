@@ -8,3 +8,6 @@ using namespace std;
 
 void printMenu(vector<string> &options, int width=40);
 int getIDFromUser();
+string getURLFromUser();
+void exitPrg();
+void invalidChoice();

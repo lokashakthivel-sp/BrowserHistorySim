@@ -55,6 +55,7 @@ void Tab::showHistory()
 
 int Tab::getTabID()
 {
+    //used in displayTabs fn in Browser
     return tabID;
 }
 

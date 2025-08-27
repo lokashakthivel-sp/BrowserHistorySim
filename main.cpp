@@ -8,8 +8,11 @@ vector<string> options = {
     "Switch Tab",
     "Close Tab",
     "Display Tabs",
-    "",
-    "",
+    "Visit Page",
+    "Back",
+    "Forward",
+    "Show History",
+    "Exit"
 };
 int main()
 {
@@ -27,31 +30,30 @@ int main()
             browser.createTab();
             break;
         case 2:
-            int id = getIDFromUser();
-            browser.switchTab(id);
+            browser.switchTab(getIDFromUser());
             break;
         case 3:
-            int id = getIDFromUser();
-            browser.closeTab(id);
+            browser.closeTab(getIDFromUser());
             break;
         case 4:
             browser.displayTabs();
             break;
         case 5:
-            /* code */
+            browser.getCurrentTab()->visit(getURLFromUser());
             break;
         case 6:
-            /* code */
+            browser.getCurrentTab()->goBack();
             break;
         case 7:
-            /* code */
+            browser.getCurrentTab()->goForward();
             break;
         case 8:
-            /* code */
+            browser.getCurrentTab()->showHistory();
             break;
-
+        case 9:
+            exitPrg();
         default:
-            break;
+            invalidChoice();
         }
-    } while (choice != 8);
+    } while (choice != 9);
 }

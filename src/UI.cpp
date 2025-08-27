@@ -33,8 +33,25 @@ void printMenu(vector<string> &options, int width)
 int getIDFromUser()
 {
     int id;
-    cout << YELLOW << "\tEnter the tab id: ";
-    cin >> id;
+    cout << YELLOW << "\tEnter the tab id: " << RESET;
     cout << endl;
     return id;
+}
+
+string getURLFromUser()
+{
+    string url;
+    cout << YELLOW << "\tEnter the url: " << RESET;
+    cout << endl;
+    return url;
+}
+
+void exitPrg()
+{
+    cout << BOLD << CYAN << "Exiting..." << endl;
+}
+
+void invalidChoice()
+{
+    cout << BOLD << RED << "Invalid choice!!" << endl;
 }
