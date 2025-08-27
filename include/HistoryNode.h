@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-//Node struct for history list (DLL)
+// Node struct for history list (DLL)
 struct HistoryNode
 {
     std::string url;

@@ -1,6 +1,6 @@
 #pragma once
 #include "HistoryNode.h"
-//template for obj which stores history of tab in DLL data structure
+// class for obj which stores history of tab in DLL data structure
 class HistoryList
 {
 private:
@@ -13,4 +13,5 @@ public:
     void add(std::string url);
     void showHistory();
     void clear();
+    HistoryNode *getHead();
 };

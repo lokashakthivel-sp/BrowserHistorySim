@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-//stack to move forward and backward in tab history
+// stack to move forward and backward in tab history
 class Stack
 {
 private:

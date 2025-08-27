@@ -5,7 +5,10 @@
 class Browser
 {
 private:
-    std::vector<Tab> tabs; // limit size to 3
+    // limiting no of tabs to 3
+    const int MAX_TABS_COUNT = 3;
+    std::vector<Tab *> tabs;
+    // currentTabIndex will be 1 based index
     int currentTabIndex;
 
 public:
@@ -13,8 +16,8 @@ public:
     ~Browser();
 
     void createTab();
-    void switchTab(int id);
-    void closeTab(int id);
+    void switchTab(int index);
+    void closeTab(int index);
     Tab *getCurrentTab();
     void displayTabs();
     int getTabCount();
