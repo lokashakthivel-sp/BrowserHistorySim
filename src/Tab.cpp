@@ -2,7 +2,7 @@
 #include "Tab.h"
 using namespace std;
 
-Tab::Tab(int id) : tabID(id), currentURL("") {}
+Tab::Tab(int id) : currentURL(""), tabID(id) {}
 Tab::~Tab() {}
 
 void Tab::visit(string url)
@@ -55,9 +55,14 @@ void Tab::showHistory()
 
 int Tab::getTabID()
 {
-    //used in displayTabs fn in Browser
+    // used in displayTabs fn in Browser
     return tabID;
 }
+/* 
+void Tab::setTabID(int id)
+{
+    tabID=id;
+} */
 
 HistoryNode *Tab::getHistoryHead()
 {

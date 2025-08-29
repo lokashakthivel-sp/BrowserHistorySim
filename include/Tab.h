@@ -19,7 +19,8 @@ public:
     void goForward();
     void showHistory();
 
+    void setTabID(int id);
     int getTabID();
-    HistoryNode* getHistoryHead();
+    HistoryNode *getHistoryHead();
     std::string getCurrentURL();
 };

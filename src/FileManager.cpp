@@ -4,10 +4,10 @@
 using namespace std;
 
 // filename is of format history/tab1.txt
-
+//dont use loop iterating var for the filename instead get tabID for each tab...
 void FileManager::saveHistory(vector<Tab *> &tabs)
 {
-    for (int i = 0; i < tabs.size(); i++)
+    for (int i = 0; i < (int)tabs.size(); i++)
     {
         string filename = "history/tab" + to_string(i + 1) + ".txt";
         ofstream file(filename);
@@ -29,7 +29,7 @@ void FileManager::saveHistory(vector<Tab *> &tabs)
 
 void FileManager::loadHistory(vector<Tab *> &tabs)
 {
-    for (int i = 0; i < tabs.size(); i++)
+    for (int i = 0; i < (int)tabs.size(); i++)
     {
         string filename = "history/tab" + to_string(i + 1) + ".txt";
         ifstream file(filename);

@@ -1,85 +1,127 @@
 #include <iostream>
 #include "Browser.h"
+#include "ColorCodes.h"
 using namespace std;
 
 Browser::Browser() : currentTabIndex(-1) {}
 Browser::~Browser()
 {
-    for (Tab *tab : tabs)
+    for (pair<Tab *, bool> tab : tabs)
     {
-        delete tab;
+        delete tab.first;
     }
 }
 
 void Browser::createTab()
 {
-    if (tabs.size() >= MAX_TABS_COUNT)
+    if (tabCount >= MAX_TABS_COUNT)
     {
-        cout << "Tab limit reached" << endl;
+        cout << RED << "Tab limit reached" << RESET << endl;
         return;
     }
-    // to create new tabs with incremented ids
-    int id = tabs.size() + 1;
-    // create a new tab from Tab
-    Tab *newTab = new Tab(id);
-    // pushback to tabs vector
-    tabs.push_back(newTab);
-    // set currentTabIndex tabs size ie last pushed tab
-    // *currentTabIndex is 1 based starts at 1 not 0
-    currentTabIndex = tabs.size();
-    cout << "Tab " << id << " created and switched to" << endl;
+
+    // after closing a non last tab (here except 3), there may be empty cell in any place, we want to check where it is and place the new tab
+    for (int i = 0; i < MAX_TABS_COUNT; i++)
+    {
+        // if tab is not opened
+        if (!tabs[i].second)
+        {
+            tabs[i].first = new Tab(i + 1);
+            tabs[i].second = 1;
+            currentTabIndex = i + 1;
+            tabCount++;
+            i++;
+            break;
+        }
+    }
+
+    // * currentTabIndex is 1 based starts at 1 not 0
+    // currentTabIndex = (int)tabs.size();
+    cout << "Tab " << currentTabIndex << " created and switched to" << endl;
 }
 
 void Browser::switchTab(int index)
 {
     // *index is 1 based ie starts at 1 not 0
-    if (index < 1 || index > tabs.size())
+    // invalid if tab is closed
+    if (index < 1 || index > (int)tabs.size() || tabs[index - 1].second == 0)
     {
-        cout << "Invalid tab index" << endl;
+        cout << RED << "Invalid tab index" << RESET << endl;
         return;
     }
     // set currentTabIndex to specified index
     currentTabIndex = index;
-    cout << "Switched to tab " << tabs[currentTabIndex]->getTabID() << endl;
+    cout << "Switched to tab " << getCurrentTab()->getTabID() << endl;
 }
 
+// ! issue
 void Browser::closeTab(int index)
 {
     //*index is 1 based ie starts at 1 not 0
-    if (index < 1 || index > tabs.size())
+    if (index < 1 || index > tabCount)
     {
-        cout << "Invalid tab index" << endl;
+        cout << RED << "Invalid tab index" << RESET << endl;
         return;
     }
     // delete specified tab content
-    delete tabs[index - 1];
-    // erase that tab from vector also
-    tabs.erase(tabs.begin() + index - 1);
+    delete tabs[index - 1].first;
+    tabs[index - 1].first = nullptr;
+    tabs[index - 1].second = 0;
+    tabCount--;
+    //! tabs.erase(tabs.begin() + index - 1);
 
     // suppose tabs becomes empty, set currentTabIndex to -1
     // or else set it to min of index and tabs size
     ////min() - casting tabs.size() from size_t to int
-    currentTabIndex = (tabs.empty()) ? -1 : min(index, (int)tabs.size());
 
+    if (currentTabIndex == index)
+    {
+        currentTabIndex = (tabs.empty()) ? -1 : min(index + 1, (int)MAX_TABS_COUNT);
+    }
+
+    cout << "Closed tab " << index << endl;
     //! the history/ .txt files will not be pointing to correct tabs after closing tab
 }
 
 Tab *Browser::getCurrentTab()
 {
-    return (currentTabIndex == -1) ? nullptr : tabs[currentTabIndex];
+    return (currentTabIndex == -1) ? nullptr : tabs[currentTabIndex - 1].first;
 }
 
 void Browser::displayTabs()
 {
-    cout << "Open Tabs:" << endl;
-    for (int i = 0; i < tabs.size(); i++)
+    if (currentTabIndex <= 0)
     {
-        cout << (i == currentTabIndex ? "->" : "  ");
-        cout << "Tab " << tabs[i]->getTabID() << "Current URL: " << (tabs[i]->getCurrentURL().empty() ? "empty" : tabs[i]->getCurrentURL()) << endl;
+        cout << RED << "No open tabs" << RESET << endl;
+    }
+    cout << "Open Tabs: " << currentTabIndex << tabCount << endl;
+    //
+    for (int i = 0; i < MAX_TABS_COUNT; i++)
+    {
+        if (tabs[i].second == 0)
+        {
+            continue;
+        }
+        if (i + 1 == currentTabIndex)
+        {
+            cout << CYAN << "->";
+        }
+        else
+        {
+            cout << RESET << "  ";
+        }
+        cout << "Tab " << tabs[i].first->getTabID() << " Current URL: " << (tabs[i].first->getCurrentURL().empty() ? "empty" : tabs[i].first->getCurrentURL()) << endl;
     }
 }
 
+/*
 int Browser::getTabCount()
 {
     return tabs.size();
 }
+
+void Browser::incTabCount()
+{
+    tabCount++;
+}
+*/

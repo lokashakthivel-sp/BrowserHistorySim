@@ -36,6 +36,7 @@ void HistoryList::showHistory()
     while (temp)
     {
         cout << temp->url << endl;
+        temp = temp->next;
     }
 }
 

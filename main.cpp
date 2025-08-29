@@ -9,11 +9,10 @@ vector<string> options = {
     "Close Tab",
     "Display Tabs",
     "Visit Page",
-    "Back",
-    "Forward",
+    "Back - Previous Page",
+    "Forward - Next Page",
     "Show History",
-    "Exit"
-};
+    "Exit"};
 int main()
 {
     Browser browser;
@@ -22,7 +21,7 @@ int main()
     do
     {
         // browser.displayTabs();
-        printMenu(options);
+        printMenu(options, 60);
         cin >> choice;
         switch (choice)
         {
@@ -52,6 +51,7 @@ int main()
             break;
         case 9:
             exitPrg();
+            break;
         default:
             invalidChoice();
         }

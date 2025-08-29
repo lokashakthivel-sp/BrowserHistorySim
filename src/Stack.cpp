@@ -37,3 +37,13 @@ string Stack::peek()
 {
     return Stack::isEmpty() ? "" : top->url;
 }
+
+void Stack::clear()
+{
+    while (top)
+    {
+        Node *temp = top;
+        top = top->next;
+        delete temp;
+    }
+}
