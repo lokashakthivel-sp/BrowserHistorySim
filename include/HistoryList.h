@@ -1,5 +1,6 @@
 #pragma once
 #include "HistoryNode.h"
+#include "ColorCodes.h"
 // class for obj which stores history of tab in DLL data structure
 class HistoryList
 {

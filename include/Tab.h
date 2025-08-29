@@ -18,6 +18,7 @@ public:
     void goBack();
     void goForward();
     void showHistory();
+    void clearHistory();
 
     void setTabID(int id);
     int getTabID();

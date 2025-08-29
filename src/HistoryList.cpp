@@ -28,10 +28,10 @@ void HistoryList::showHistory()
 {
     if (!head)
     {
-        cout << "No history to show" << endl;
+        cout << RED << "No history to show" << RESET << endl;
         return;
     }
-    cout << "Full History" << endl;
+    cout << YELLOW << "Full History" << RESET << endl;
     HistoryNode *temp = head;
     while (temp)
     {
@@ -42,6 +42,7 @@ void HistoryList::showHistory()
 
 void HistoryList::clear()
 {
+    cout << YELLOW << "History Cleared" << RESET << endl;
     // clearing history list
     while (head)
     {

@@ -12,6 +12,7 @@ vector<string> options = {
     "Back - Previous Page",
     "Forward - Next Page",
     "Show History",
+    "Clear History",
     "Exit"};
 int main()
 {
@@ -21,8 +22,15 @@ int main()
     do
     {
         // browser.displayTabs();
-        printMenu(options, 60);
+        printMenu(options);
         cin >> choice;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            invalidChoice();
+            continue;
+        }
         switch (choice)
         {
         case 1:
@@ -50,10 +58,13 @@ int main()
             browser.getCurrentTab()->showHistory();
             break;
         case 9:
+            browser.getCurrentTab()->clearHistory();
+            break;
+        case 10:
             exitPrg();
             break;
         default:
             invalidChoice();
         }
-    } while (choice != 9);
+    } while (choice < 10);
 }

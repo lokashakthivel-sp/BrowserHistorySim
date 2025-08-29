@@ -4,7 +4,8 @@
 using namespace std;
 
 // filename is of format history/tab1.txt
-//dont use loop iterating var for the filename instead get tabID for each tab...
+
+//! rewrite based on changes to tabs array
 void FileManager::saveHistory(vector<Tab *> &tabs)
 {
     for (int i = 0; i < (int)tabs.size(); i++)

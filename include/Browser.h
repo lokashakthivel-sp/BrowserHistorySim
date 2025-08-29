@@ -24,6 +24,4 @@ public:
     void displayTabs();
 
     Tab *getCurrentTab();
-    /*     int getTabCount();
-        void incTabCount(); */
 };

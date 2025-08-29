@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Browser.h"
-#include "ColorCodes.h"
 using namespace std;
 
 Browser::Browser() : currentTabIndex(-1) {}
@@ -36,7 +35,6 @@ void Browser::createTab()
     }
 
     // * currentTabIndex is 1 based starts at 1 not 0
-    // currentTabIndex = (int)tabs.size();
     cout << "Tab " << currentTabIndex << " created and switched to" << endl;
 }
 
@@ -51,10 +49,9 @@ void Browser::switchTab(int index)
     }
     // set currentTabIndex to specified index
     currentTabIndex = index;
-    cout << "Switched to tab " << getCurrentTab()->getTabID() << endl;
+    cout << "Switched to tab " << currentTabIndex << endl;
 }
 
-// ! issue
 void Browser::closeTab(int index)
 {
     //*index is 1 based ie starts at 1 not 0
@@ -68,12 +65,11 @@ void Browser::closeTab(int index)
     tabs[index - 1].first = nullptr;
     tabs[index - 1].second = 0;
     tabCount--;
-    //! tabs.erase(tabs.begin() + index - 1);
 
-    // suppose tabs becomes empty, set currentTabIndex to -1
-    // or else set it to min of index and tabs size
-    ////min() - casting tabs.size() from size_t to int
+    // suppose tabs becomes empty, set currentTabIndex to -1 or else set it to min of index and MAX tab count
 
+    //! setting the currentTabIndex is not working correct here.
+    //* if the current tab is 2 and we delete tab2 the current tab index becomes 3 ??
     if (currentTabIndex == index)
     {
         currentTabIndex = (tabs.empty()) ? -1 : min(index + 1, (int)MAX_TABS_COUNT);
@@ -85,6 +81,7 @@ void Browser::closeTab(int index)
 
 Tab *Browser::getCurrentTab()
 {
+    cout << "Current Tab " << GREEN << currentTabIndex << RESET << endl;
     return (currentTabIndex == -1) ? nullptr : tabs[currentTabIndex - 1].first;
 }
 
@@ -95,13 +92,14 @@ void Browser::displayTabs()
         cout << RED << "No open tabs" << RESET << endl;
     }
     cout << "Open Tabs: " << currentTabIndex << tabCount << endl;
-    //
     for (int i = 0; i < MAX_TABS_COUNT; i++)
     {
+        // if tab is closed we skip
         if (tabs[i].second == 0)
         {
             continue;
         }
+        // for current tab
         if (i + 1 == currentTabIndex)
         {
             cout << CYAN << "->";
@@ -113,15 +111,3 @@ void Browser::displayTabs()
         cout << "Tab " << tabs[i].first->getTabID() << " Current URL: " << (tabs[i].first->getCurrentURL().empty() ? "empty" : tabs[i].first->getCurrentURL()) << endl;
     }
 }
-
-/*
-int Browser::getTabCount()
-{
-    return tabs.size();
-}
-
-void Browser::incTabCount()
-{
-    tabCount++;
-}
-*/

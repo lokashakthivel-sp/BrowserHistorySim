@@ -13,8 +13,8 @@ void printMenu(vector<string> &options, int width)
 {
     cout << BOLD << BLUE << "." << repeat(".", width - 2) << "." << RESET << "\n";
     cout << BOLD << BLUE << ":" << RESET
-         << BG_BLUE << setw((width - 2) / 2 + 7) << "Browser Tabs Menu"
-         << setw((width - 2) / 2 - 3) << RESET << CYAN << ":" << RESET << "\n";
+         << BG_BLUE << setw((width - 2) / 2 + 12) << "Browser History Sim Menu"
+         << setw((width - 2) / 2 - 8) << RESET << CYAN << ":" << RESET << "\n";
     cout << BOLD << BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
 
     for (int i = 0; i < (int)options.size(); i++)
@@ -31,8 +31,14 @@ void printMenu(vector<string> &options, int width)
 int getIDFromUser()
 {
     int id;
-    cout << YELLOW << "\tEnter the tab id: " << RESET;
+    cout << YELLOW << "    Enter the tab id: " << RESET;
     cin >> id;
+    if (cin.fail())
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return 0;
+    }
     cout << endl;
     return id;
 }
@@ -40,7 +46,7 @@ int getIDFromUser()
 string getURLFromUser()
 {
     string url;
-    cout << YELLOW << "\tEnter the url: " << RESET;
+    cout << YELLOW << "    Enter the url: " << RESET;
     cin >> url;
     cout << endl;
     return url;
