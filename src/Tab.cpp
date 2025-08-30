@@ -19,7 +19,7 @@ void Tab::visit(string url)
     currentURL = url;
     // add to history
     history.add(url);
-    cout << "Visited: " << GREEN << url << RESET << endl;
+    cout << "Visited: " << GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goBack()
@@ -43,11 +43,35 @@ void Tab::goForward()
         cout << RED << "No next page" << RESET << endl;
         return;
     }
-    // push currentURL to backward
+    // push currentURL to backwardStack
     backwardStack.push(currentURL);
     // set currentURL to top of forwardStack
     currentURL = forwardStack.pop();
     cout << "Forward to: " << GREEN << currentURL << RESET << endl;
+}
+
+void Tab::closeCurrentPage()
+{
+    cout << GREEN << currentURL << RESET << "Closed" << endl;
+    if (currentURL == "")
+    {
+        cout << RED << "No page visited" << RESET << endl;
+        return;
+    }
+    history.closePage(currentURL);
+    if (!forwardStack.isEmpty())
+    {
+        currentURL = forwardStack.pop();
+    }
+    else if (!backwardStack.isEmpty())
+    {
+        currentURL = backwardStack.pop();
+    }
+    else
+    {
+        currentURL = "";
+    }
+    // delete in history dll
 }
 
 void Tab::showHistory()
@@ -55,10 +79,10 @@ void Tab::showHistory()
     history.showHistory();
 }
 
-void Tab::clearHistory()
+void Tab::clearHistory(int flag)
 {
     currentURL = "";
-    history.clear();
+    history.clear(flag);
 }
 
 int Tab::getTabID()
@@ -66,11 +90,6 @@ int Tab::getTabID()
     // used in displayTabs fn in Browser
     return tabID;
 }
-/*
-void Tab::setTabID(int id)
-{
-    tabID=id;
-} */
 
 HistoryNode *Tab::getHistoryHead()
 {

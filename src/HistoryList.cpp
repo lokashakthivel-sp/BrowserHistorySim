@@ -31,7 +31,7 @@ void HistoryList::showHistory()
         cout << RED << "No history to show" << RESET << endl;
         return;
     }
-    cout << YELLOW << "Full History" << RESET << endl;
+    cout << YELLOW << "History" << RESET << endl;
     HistoryNode *temp = head;
     while (temp)
     {
@@ -40,9 +40,43 @@ void HistoryList::showHistory()
     }
 }
 
-void HistoryList::clear()
+void HistoryList::closePage(string url)
 {
-    cout << YELLOW << "History Cleared" << RESET << endl;
+    if (head == nullptr)
+    {
+        cout << RED << "No page visited" << RESET << endl;
+        return;
+    }
+    HistoryNode *temp = head;
+    while (temp != nullptr && temp->url != url)
+    {
+        temp = temp->next;
+    }
+    cout << GREEN << temp->url << RESET << "Closed" << endl;
+    if (temp == nullptr)
+    {
+        cout << GREEN << url << RED << " not visited" << RESET << endl;
+    }
+    // deleting head
+    if (temp->prev == NULL)
+        head = temp->next;
+    else
+        temp->prev->next = temp->next;
+
+    // except deleting tail
+    if (temp->next != NULL)
+        temp->next->prev = temp->prev;
+
+    delete temp;
+}
+
+void HistoryList::clear(int flag)
+{
+    // to print only when explicitly called
+    if (flag)
+    {
+        cout << YELLOW << "History Cleared" << RESET << endl;
+    }
     // clearing history list
     while (head)
     {

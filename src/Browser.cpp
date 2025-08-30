@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Browser.h"
+#include "FileManager.h"
 using namespace std;
 
 Browser::Browser() : currentTabIndex(-1) {}
@@ -68,15 +69,16 @@ void Browser::closeTab(int index)
 
     // suppose tabs becomes empty, set currentTabIndex to -1 or else set it to min of index and MAX tab count
 
-    //! setting the currentTabIndex is not working correct here.
-    //* if the current tab is 2 and we delete tab2 the current tab index becomes 3 ??
     if (currentTabIndex == index)
     {
         currentTabIndex = (tabs.empty()) ? -1 : min(index + 1, (int)MAX_TABS_COUNT);
+        if (tabCount < currentTabIndex)
+        {
+            currentTabIndex = tabCount;
+        }
     }
 
     cout << "Closed tab " << index << endl;
-    //! the history/ .txt files will not be pointing to correct tabs after closing tab
 }
 
 Tab *Browser::getCurrentTab()
@@ -109,5 +111,35 @@ void Browser::displayTabs()
             cout << RESET << "  ";
         }
         cout << "Tab " << tabs[i].first->getTabID() << " Current URL: " << (tabs[i].first->getCurrentURL().empty() ? "empty" : tabs[i].first->getCurrentURL()) << endl;
+    }
+}
+
+// for use in fileManager
+int Browser::getTabCount()
+{
+    return tabCount;
+}
+
+void Browser::saveHistory()
+{
+    for (int i = 0; i < MAX_TABS_COUNT; i++)
+    {
+        if (tabs[i].second == 0)
+        {
+            continue;
+        }
+        FileManager::saveHistory(tabs[i].first);
+    }
+}
+
+void Browser::loadHistory()
+{
+    for (int i = 0; i < MAX_TABS_COUNT; i++)
+    {
+        if (tabs[i].second == 0)
+        {
+            continue;
+        }
+        FileManager::loadHistory(tabs[i].first);
     }
 }

@@ -12,7 +12,8 @@ public:
     ~HistoryList();
 
     void add(std::string url);
+    void closePage(std::string url);
     void showHistory();
-    void clear();
+    void clear(int flag = 0);
     HistoryNode *getHead();
 };

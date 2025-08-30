@@ -8,6 +8,6 @@ class FileManager
 {
 public:
     // set to static so it can be accessed without object
-    static void saveHistory(std::vector<Tab *> &tabs);
-    static void loadHistory(std::vector<Tab *> &tabs);
+    static void saveHistory(Tab *);
+    static void loadHistory(Tab *);
 };

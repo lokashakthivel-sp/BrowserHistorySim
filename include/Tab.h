@@ -17,8 +17,9 @@ public:
     void visit(std::string url);
     void goBack();
     void goForward();
+    void closeCurrentPage();
     void showHistory();
-    void clearHistory();
+    void clearHistory(int flag);
 
     void setTabID(int id);
     int getTabID();

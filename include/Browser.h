@@ -23,5 +23,8 @@ public:
     void closeTab(int index);
     void displayTabs();
 
+    void saveHistory();
+    void loadHistory();
     Tab *getCurrentTab();
+    int getTabCount();
 };
