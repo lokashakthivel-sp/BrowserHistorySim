@@ -1,11 +1,12 @@
 #include <iostream>
-#include <fstream>
+
 #include "FileManager.h"
 using namespace std;
 
 // filename is of format history/tab1.txt
 
-//! rewrite based on changes to tabs array
+// todo: the write during saving and exiting overwrites the history file
+
 void FileManager::saveHistory(Tab *tab)
 {
     string filename = "history/tab" + to_string(tab->getTabID()) + ".txt";
@@ -19,7 +20,7 @@ void FileManager::saveHistory(Tab *tab)
     // writing history DLL into file
     while (temp)
     {
-        file << temp->url << "\n";
+        file << temp->url << "," << temp->timeStamp;
         temp = temp->next;
     }
     file.close();
@@ -35,13 +36,28 @@ void FileManager::loadHistory(Tab *tab)
         cout << RED << "No history stored" << filename << RESET << endl;
         return;
     }
+    string line;
     string url;
+    string timeStamp;
     // reading history from file
-    while (getline(file, url))
+    while (getline(file, line))
     {
-        if (!url.empty())
+        if (!line.empty())
         {
-            tab->visit(url);
+            cout << line;
+            size_t pos = line.find(',');
+            if (pos != string::npos)
+            {
+                string url = line.substr(0, pos);
+                cout << url;
+
+                // convert timestamp to readable format
+                string timeStr;
+                stringstream ss(line.substr(pos + 1));
+                getline(ss, timeStr);
+                cout << timeStr;
+                tab->visit(url, timeStr);
+            }
         }
     }
     file.close();

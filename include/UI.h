@@ -9,6 +9,7 @@ using namespace std;
 
 void printMenu(vector<string> &options, int width = 50);
 int getIDFromUser();
+//string getTimeNow();
 string getURLFromUser();
 void exitPrg();
 void invalidChoice();

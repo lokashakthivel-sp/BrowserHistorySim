@@ -14,7 +14,7 @@ private:
 public:
     Tab(int id);
     ~Tab();
-    void visit(std::string url);
+    void visit(std::string url, std::string timeStamp);
     void goBack();
     void goForward();
     void closeCurrentPage();

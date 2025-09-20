@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Iinclude -Wall -std=c++17
+CXXFLAGS = -Iinclude -Wall -std=c++20
 MAIN = main.cpp
 SRC = $(wildcard src/*.cpp)
 OUT = main.exe

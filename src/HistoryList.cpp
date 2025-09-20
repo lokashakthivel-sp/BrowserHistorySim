@@ -1,4 +1,5 @@
 #include <iostream>
+#include <chrono>
 #include "HistoryList.h"
 using namespace std;
 
@@ -8,9 +9,15 @@ HistoryList::~HistoryList()
     clear();
 }
 
-void HistoryList::add(string url)
+void HistoryList::add(string url, string timeStamp = "")
 {
-    HistoryNode *newNode = new HistoryNode(url);
+    if (timeStamp == "")
+    {
+        auto now = chrono::system_clock::now();
+        time_t time = chrono::system_clock::to_time_t(now);
+        timeStamp = ctime(&time);
+    }
+    HistoryNode *newNode = new HistoryNode(url, timeStamp);
     // add new url to last of the history list
     if (head == nullptr)
     {
@@ -24,6 +31,7 @@ void HistoryList::add(string url)
     }
 }
 
+// TODO add proper timestamp storing functionality
 void HistoryList::showHistory()
 {
     if (!head)
@@ -33,9 +41,11 @@ void HistoryList::showHistory()
     }
     cout << YELLOW << "History" << RESET << endl;
     HistoryNode *temp = head;
+    int i = 0;
     while (temp)
     {
-        cout << temp->url << endl;
+        cout << ++i << ". " << temp->url << " - " << CYAN << temp->timeStamp << endl
+             << RESET;
         temp = temp->next;
     }
 }
@@ -66,6 +76,8 @@ void HistoryList::closePage(string url)
     // except deleting tail
     if (temp->next != NULL)
         temp->next->prev = temp->prev;
+    else
+        tail = temp->prev;
 
     delete temp;
 }

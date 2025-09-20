@@ -7,7 +7,7 @@ using namespace std;
 Tab::Tab(int id) : currentURL(""), tabID(id) {}
 Tab::~Tab() {}
 
-void Tab::visit(string url)
+void Tab::visit(string url, string timeStamp)
 {
     // clear forwardStack and push string-currentURL to backwardStack when currentURL is not empty
     if (!currentURL.empty())
@@ -18,7 +18,7 @@ void Tab::visit(string url)
     // set currentURL
     currentURL = url;
     // add to history
-    history.add(url);
+    history.add(url, timeStamp);
     cout << "Visited: " << GREEN << currentURL << RESET << endl;
 }
 
@@ -52,7 +52,7 @@ void Tab::goForward()
 
 void Tab::closeCurrentPage()
 {
-    cout << GREEN << currentURL << RESET << "Closed" << endl;
+    // cout << GREEN << currentURL << RESET << "Closed" << endl;
     if (currentURL == "")
     {
         cout << RED << "No page visited" << RESET << endl;

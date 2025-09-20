@@ -37,7 +37,7 @@ int main()
         {
         case 1:
             browser.createTab();
-            browser.loadHistory();
+            //browser.loadHistory();
             break;
         case 2:
             browser.switchTab(getIDFromUser());
@@ -49,7 +49,7 @@ int main()
             browser.displayTabs();
             break;
         case 5:
-            browser.getCurrentTab()->visit(getURLFromUser());
+            browser.getCurrentTab()->visit(getURLFromUser(), "");
             break;
         case 6:
             browser.getCurrentTab()->goBack();

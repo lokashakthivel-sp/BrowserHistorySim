@@ -2,6 +2,8 @@
 #include "Tab.h"
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 // to save and load history of each tab from separate files
 class FileManager

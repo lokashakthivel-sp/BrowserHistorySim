@@ -4,6 +4,8 @@
 struct HistoryNode
 {
     std::string url;
+    std::string timeStamp;
     HistoryNode *next, *prev;
-    HistoryNode(std::string url) : url(url), next(nullptr), prev(nullptr) {}
+
+    HistoryNode(std::string url, std::string timeStamp) : url(url), timeStamp(timeStamp), next(nullptr), prev(nullptr) {}
 };

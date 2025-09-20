@@ -43,6 +43,15 @@ int getIDFromUser()
     return id;
 }
 
+/* string getTimeNow()
+{
+    string timeStr;
+    auto now = chrono::system_clock::now();
+        time_t time = chrono::system_clock::to_time_t(now);
+        timeStamp = ctime(&time);
+    return timeStr;
+} */
+
 string getURLFromUser()
 {
     string url;

@@ -11,7 +11,7 @@ public:
     HistoryList();
     ~HistoryList();
 
-    void add(std::string url);
+    void add(std::string url, std::string timeStamp);
     void closePage(std::string url);
     void showHistory();
     void clear(int flag = 0);

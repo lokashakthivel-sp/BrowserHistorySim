@@ -35,6 +35,8 @@ void Browser::createTab()
         }
     }
 
+    loadHistory();
+
     // * currentTabIndex is 1 based starts at 1 not 0
     cout << "Tab " << currentTabIndex << " created and switched to" << endl;
 }
@@ -110,7 +112,7 @@ void Browser::displayTabs()
         {
             cout << RESET << "  ";
         }
-        cout << "Tab " << tabs[i].first->getTabID() << " Current URL: " << (tabs[i].first->getCurrentURL().empty() ? "empty" : tabs[i].first->getCurrentURL()) << endl;
+        cout << "Tab " << tabs[i].first->getTabID() << " Current URL: " << (tabs[i].first->getCurrentURL().empty() ? "..." : tabs[i].first->getCurrentURL()) << endl;
     }
 }
 
@@ -134,12 +136,5 @@ void Browser::saveHistory()
 
 void Browser::loadHistory()
 {
-    for (int i = 0; i < MAX_TABS_COUNT; i++)
-    {
-        if (tabs[i].second == 0)
-        {
-            continue;
-        }
-        FileManager::loadHistory(tabs[i].first);
-    }
+    FileManager::loadHistory(getCurrentTab());
 }
