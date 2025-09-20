@@ -9,6 +9,7 @@ string repeat(string s, int count)
     }
     return res;
 }
+
 void printMenu(vector<string> &options, int width)
 {
     cout << BOLD << BLUE << "." << repeat(".", width - 2) << "." << RESET << "\n";
@@ -26,6 +27,10 @@ void printMenu(vector<string> &options, int width)
 
     cout << BOLD << BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
     cout << YELLOW << "Choice: " << RESET;
+}
+
+void printBrowser()
+{
 }
 
 int getIDFromUser()

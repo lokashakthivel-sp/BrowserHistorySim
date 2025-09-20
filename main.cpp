@@ -71,8 +71,8 @@ int main()
             browser.clearHistory();
             break;
         case 12:
-            browser.saveHistory();
             exitPrg();
+            browser.saveHistory();
             break;
         default:
             invalidChoice();

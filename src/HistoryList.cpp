@@ -51,7 +51,7 @@ void HistoryList::showHistory(string currentUrl)
         {
             cout << RESET << "  ";
         }
-        cout << ++i << ". " << temp->url << " - " << temp->timeStamp << RESET;
+        cout << ++i << ". " << temp->url << " - " << temp->timeStamp << RESET << endl;
         temp = temp->next;
     }
 }
