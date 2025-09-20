@@ -43,6 +43,11 @@ void Browser::createTab()
 
 void Browser::switchTab(int index)
 {
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
     // *index is 1 based ie starts at 1 not 0
     // invalid if tab is closed
     if (index < 1 || index > (int)tabs.size() || tabs[index - 1].second == 0)
@@ -57,12 +62,19 @@ void Browser::switchTab(int index)
 
 void Browser::closeTab(int index)
 {
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
     //*index is 1 based ie starts at 1 not 0
     if (index < 1 || index > tabCount)
     {
         cout << RED << "Invalid tab index" << RESET << endl;
         return;
     }
+    FileManager::saveHistory(tabs[index - 1].first);
+
     // delete specified tab content
     delete tabs[index - 1].first;
     tabs[index - 1].first = nullptr;
@@ -89,13 +101,74 @@ Tab *Browser::getCurrentTab()
     return (currentTabIndex == -1) ? nullptr : tabs[currentTabIndex - 1].first;
 }
 
+void Browser::visitPage(string url, string timeStamp)
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->visit(url, timeStamp);
+}
+
+void Browser::closePage()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->closeCurrentPage();
+}
+
+void Browser::goBack()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->goBack();
+}
+
+void Browser::goForward()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->goForward();
+}
+
+void Browser::showHistory()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->showHistory();
+}
+
+void Browser::openPage()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->openCurrentPage();
+}
+
 void Browser::displayTabs()
 {
     if (currentTabIndex <= 0)
     {
         cout << RED << "No open tabs" << RESET << endl;
+        return;
     }
-    cout << "Open Tabs: " << currentTabIndex << tabCount << endl;
+    cout << "Current Tab " << GREEN << currentTabIndex << RESET << endl;
     for (int i = 0; i < MAX_TABS_COUNT; i++)
     {
         // if tab is closed we skip
@@ -132,6 +205,18 @@ void Browser::saveHistory()
         }
         FileManager::saveHistory(tabs[i].first);
     }
+}
+
+void Browser::clearHistory()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    Tab *tempTab = getCurrentTab();
+    tempTab->clearHistory(1);
+    FileManager::saveHistory(tempTab);
 }
 
 void Browser::loadHistory()

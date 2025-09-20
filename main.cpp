@@ -9,12 +9,13 @@ vector<string> options = {
     "Close Tab",
     "Display Tabs",
     "Visit Page",
+    "Open Page in Browser",
     "Back - Previous Page",
     "Forward - Next Page",
     "Close Current Page",
     "Show History",
     "Clear History",
-    "Exit"};
+    "Save and Exit"};
 // add closing a current page function
 int main()
 {
@@ -37,7 +38,7 @@ int main()
         {
         case 1:
             browser.createTab();
-            //browser.loadHistory();
+            // browser.loadHistory();
             break;
         case 2:
             browser.switchTab(getIDFromUser());
@@ -49,29 +50,32 @@ int main()
             browser.displayTabs();
             break;
         case 5:
-            browser.getCurrentTab()->visit(getURLFromUser(), "");
+            browser.visitPage(getURLFromUser(), "");
             break;
         case 6:
-            browser.getCurrentTab()->goBack();
+            browser.openPage();
             break;
         case 7:
-            browser.getCurrentTab()->goForward();
+            browser.goBack();
             break;
         case 8:
-            browser.getCurrentTab()->closeCurrentPage();
+            browser.goForward();
             break;
         case 9:
-            browser.getCurrentTab()->showHistory();
+            browser.closePage();
             break;
         case 10:
-            browser.getCurrentTab()->clearHistory(1);
+            browser.showHistory();
             break;
         case 11:
+            browser.clearHistory();
+            break;
+        case 12:
             browser.saveHistory();
             exitPrg();
             break;
         default:
             invalidChoice();
         }
-    } while (choice != 11);
+    } while (choice != 12);
 }

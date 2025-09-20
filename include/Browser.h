@@ -23,7 +23,15 @@ public:
     void closeTab(int index);
     void displayTabs();
 
+    void visitPage(std::string url, std::string timeStamp);
+    void closePage();
+    void goBack();
+    void goForward();
+    void showHistory();
+    void openPage();
+
     void saveHistory();
+    void clearHistory();
     void loadHistory();
     Tab *getCurrentTab();
     int getTabCount();

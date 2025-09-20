@@ -20,9 +20,10 @@ void FileManager::saveHistory(Tab *tab)
     // writing history DLL into file
     while (temp)
     {
-        file << temp->url << "," << temp->timeStamp;
+        file << temp->url << "," << temp->timeStamp << "\n";
         temp = temp->next;
     }
+    cout << CYAN << "History saved" << RESET << endl;
     file.close();
 }
 
@@ -39,26 +40,31 @@ void FileManager::loadHistory(Tab *tab)
     string line;
     string url;
     string timeStamp;
+
+    bool flag = 0;
     // reading history from file
     while (getline(file, line))
     {
         if (!line.empty())
         {
-            cout << line;
             size_t pos = line.find(',');
             if (pos != string::npos)
             {
                 string url = line.substr(0, pos);
-                cout << url;
-
                 // convert timestamp to readable format
                 string timeStr;
                 stringstream ss(line.substr(pos + 1));
                 getline(ss, timeStr);
-                cout << timeStr;
+                if (!line.empty() && line.back() == '\n')
+                {
+                    line.pop_back();
+                }
                 tab->visit(url, timeStr);
+                flag = 1;
             }
         }
     }
+    if (flag)
+        cout << CYAN << "History loaded" << RESET << endl;
     file.close();
 }

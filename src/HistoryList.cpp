@@ -6,7 +6,7 @@ using namespace std;
 HistoryList::HistoryList() : head(nullptr), tail(nullptr) {}
 HistoryList::~HistoryList()
 {
-    clear();
+    clear(0);
 }
 
 void HistoryList::add(string url, string timeStamp = "")
@@ -31,8 +31,7 @@ void HistoryList::add(string url, string timeStamp = "")
     }
 }
 
-// TODO add proper timestamp storing functionality
-void HistoryList::showHistory()
+void HistoryList::showHistory(string currentUrl)
 {
     if (!head)
     {
@@ -44,8 +43,15 @@ void HistoryList::showHistory()
     int i = 0;
     while (temp)
     {
-        cout << ++i << ". " << temp->url << " - " << CYAN << temp->timeStamp << endl
-             << RESET;
+        if (temp->url == currentUrl)
+        {
+            cout << CYAN << "->";
+        }
+        else
+        {
+            cout << RESET << "  ";
+        }
+        cout << ++i << ". " << temp->url << " - " << temp->timeStamp << RESET;
         temp = temp->next;
     }
 }
@@ -62,10 +68,11 @@ void HistoryList::closePage(string url)
     {
         temp = temp->next;
     }
-    cout << GREEN << temp->url << RESET << "Closed" << endl;
+    cout << GREEN << temp->url << RESET << " Closed" << endl;
     if (temp == nullptr)
     {
         cout << GREEN << url << RED << " not visited" << RESET << endl;
+        return;
     }
     // deleting head
     if (temp->prev == NULL)

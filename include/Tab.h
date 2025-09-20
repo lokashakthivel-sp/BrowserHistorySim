@@ -17,12 +17,14 @@ public:
     void visit(std::string url, std::string timeStamp);
     void goBack();
     void goForward();
+    void openCurrentPage();
     void closeCurrentPage();
     void showHistory();
     void clearHistory(int flag);
 
-    void setTabID(int id);
     int getTabID();
     HistoryNode *getHistoryHead();
     std::string getCurrentURL();
+
+    bool isValidURL(const std::string &url);
 };

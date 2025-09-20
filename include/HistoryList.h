@@ -13,7 +13,7 @@ public:
 
     void add(std::string url, std::string timeStamp);
     void closePage(std::string url);
-    void showHistory();
+    void showHistory(std::string currentUrl);
     void clear(int flag = 0);
     HistoryNode *getHead();
 };

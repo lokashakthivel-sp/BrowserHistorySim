@@ -2,6 +2,8 @@
 #include "Tab.h"
 // for system() fn - opens a shell to execute the passed cli cmd
 #include <cstdlib>
+// for url validation
+#include <regex>
 using namespace std;
 
 Tab::Tab(int id) : currentURL(""), tabID(id) {}
@@ -50,14 +52,53 @@ void Tab::goForward()
     cout << "Forward to: " << GREEN << currentURL << RESET << endl;
 }
 
+void Tab::openCurrentPage()
+{
+    // if url is valid open chrome browser with the url
+    if (isValidURL(currentURL))
+    {
+        string cmd = "start " + currentURL;
+        system(cmd.c_str());
+        cout << GREEN << currentURL << RESET << " opened in default browser" << endl;
+    }
+    // if not valid open a custom 404 html page by passing the invalid url to display there
+    else
+    {
+        cout << GREEN << currentURL << RED << " - Invalid url to open in browser" << RESET << endl;
+    }
+}
+
+bool Tab::isValidURL(const string &url)
+{
+    if (url.empty())
+    {
+        return false;
+    }
+
+    // must not contain spaces
+    if (url.find(' ') != string::npos)
+    {
+        return false;
+    }
+
+    // must follow the standard url pattern
+    regex pattern("^(https?://)?(www\\.)?[a-zA-Z0-9]+\\.[a-z]{2,}(/.*)?$");
+    if (regex_match(url, pattern))
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void Tab::closeCurrentPage()
 {
-    // cout << GREEN << currentURL << RESET << "Closed" << endl;
     if (currentURL == "")
     {
         cout << RED << "No page visited" << RESET << endl;
         return;
     }
+    // delete in history dll
     history.closePage(currentURL);
     if (!forwardStack.isEmpty())
     {
@@ -71,12 +112,11 @@ void Tab::closeCurrentPage()
     {
         currentURL = "";
     }
-    // delete in history dll
 }
 
 void Tab::showHistory()
 {
-    history.showHistory();
+    history.showHistory(currentURL);
 }
 
 void Tab::clearHistory(int flag)
