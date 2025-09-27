@@ -21,7 +21,7 @@ void FileManager::saveHistory(Tab *tab)
         file << temp->url << "," << temp->timeStamp << "\n";
         temp = temp->next;
     }
-    cout << B_CYAN << "History saved" << RESET << endl;
+    // cout << B_CYAN << "History saved" << RESET << endl;
     file.close();
 }
 

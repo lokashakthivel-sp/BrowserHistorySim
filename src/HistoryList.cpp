@@ -17,6 +17,8 @@ void HistoryList::add(string url, string timeStamp = "")
         time_t time = chrono::system_clock::to_time_t(now);
         timeStamp = ctime(&time);
     }
+    if (timeStamp.back() == '\n')
+        timeStamp.pop_back();
     HistoryNode *newNode = new HistoryNode(url, timeStamp);
     // add new url to last of the history list
     if (head == nullptr)
@@ -50,7 +52,7 @@ void HistoryList::showHistory(string currentUrl)
         {
             cout << RESET << "    ";
         }
-        cout << ++i << ". " << temp->url << " - " << temp->timeStamp << RESET;
+        cout << ++i << ". " << temp->url << " - " << temp->timeStamp << RESET << endl;
         temp = temp->next;
     }
 }
