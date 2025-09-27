@@ -39,36 +39,47 @@ int main()
         case 1:
             browser.createTab();
             // browser.loadHistory();
+            browser.printBrowser();
             break;
         case 2:
             browser.switchTab(getIDFromUser());
+            browser.printBrowser();
             break;
         case 3:
             browser.closeTab(getIDFromUser());
+            browser.printBrowser();
             break;
         case 4:
             browser.displayTabs();
+            browser.printBrowser();
             break;
         case 5:
             browser.visitPage(getURLFromUser(), "");
+            browser.printBrowser();
             break;
         case 6:
             browser.openPage();
+            browser.printBrowser();
             break;
         case 7:
             browser.goBack();
+            browser.printBrowser();
             break;
         case 8:
             browser.goForward();
+            browser.printBrowser();
             break;
         case 9:
             browser.closePage();
+            browser.printBrowser();
             break;
         case 10:
             browser.showHistory();
+            browser.printBrowser();
             break;
         case 11:
             browser.clearHistory();
+            browser.printBrowser();
             break;
         case 12:
             exitPrg();

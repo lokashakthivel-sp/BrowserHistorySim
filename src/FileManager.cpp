@@ -5,15 +5,13 @@ using namespace std;
 
 // filename is of format history/tab1.txt
 
-// todo: the write during saving and exiting overwrites the history file
-
 void FileManager::saveHistory(Tab *tab)
 {
     string filename = "history/tab" + to_string(tab->getTabID()) + ".txt";
     ofstream file(filename);
     if (!file)
     {
-        cout << RED << "Could not open " << filename << RESET << endl;
+        cout << B_RED << "Could not open " << filename << RESET << endl;
         return;
     }
     HistoryNode *temp = tab->getHistoryHead();
@@ -23,7 +21,7 @@ void FileManager::saveHistory(Tab *tab)
         file << temp->url << "," << temp->timeStamp << "\n";
         temp = temp->next;
     }
-    cout << CYAN << "History saved" << RESET << endl;
+    cout << B_CYAN << "History saved" << RESET << endl;
     file.close();
 }
 
@@ -34,7 +32,7 @@ void FileManager::loadHistory(Tab *tab)
     ifstream file(filename);
     if (!file)
     {
-        cout << RED << "No history stored" << filename << RESET << endl;
+        cout << B_RED << "No history stored" << filename << RESET << endl;
         return;
     }
     string line;
@@ -65,6 +63,6 @@ void FileManager::loadHistory(Tab *tab)
         }
     }
     if (flag)
-        cout << CYAN << "History loaded" << RESET << endl;
+        cout << B_CYAN << "History loaded" << RESET << endl;
     file.close();
 }

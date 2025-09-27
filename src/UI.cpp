@@ -12,31 +12,27 @@ string repeat(string s, int count)
 
 void printMenu(vector<string> &options, int width)
 {
-    cout << BOLD << BLUE << "." << repeat(".", width - 2) << "." << RESET << "\n";
-    cout << BOLD << BLUE << ":" << RESET
+    cout << BOLD << B_BLUE << "." << repeat(".", width - 2) << "." << RESET << "\n";
+    cout << BOLD << B_BLUE << ":" << RESET
          << BG_BLUE << setw((width - 2) / 2 + 12) << "Browser History Sim Menu"
-         << setw((width - 2) / 2 - 8) << RESET << CYAN << ":" << RESET << "\n";
-    cout << BOLD << BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
+         << setw((width - 2) / 2 - 8) << RESET << BOLD << B_BLUE << ":" << "\n";
+    cout << BOLD << B_BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
 
     for (int i = 0; i < (int)options.size(); i++)
     {
-        cout << BOLD << BLUE << ": " << RESET
+        cout << BOLD << B_BLUE << ": " << RESET
              << setw(2) << i + 1 << ". " << options[i]
-             << setw(width - ((int)options[i].size()) - 3) << BOLD << BLUE << ":" << RESET << "\n";
+             << setw(width - ((int)options[i].size()) - 3) << BOLD << B_BLUE << ":" << RESET << "\n";
     }
 
-    cout << BOLD << BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
-    cout << YELLOW << "Choice: " << RESET;
-}
-
-void printBrowser()
-{
+    cout << BOLD << B_BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
+    cout << B_YELLOW << "Choice: " << RESET;
 }
 
 int getIDFromUser()
 {
     int id;
-    cout << YELLOW << "    Enter the tab id: " << RESET;
+    cout << B_YELLOW << "    Enter the tab id: " << RESET;
     cin >> id;
     if (cin.fail())
     {
@@ -60,7 +56,7 @@ int getIDFromUser()
 string getURLFromUser()
 {
     string url;
-    cout << YELLOW << "    Enter the url: " << RESET;
+    cout << B_YELLOW << "    Enter the url: " << RESET;
     cin >> url;
     cout << endl;
     return url;
@@ -68,10 +64,10 @@ string getURLFromUser()
 
 void exitPrg()
 {
-    cout << BOLD << CYAN << "Saving and Exiting..." << RESET << endl;
+    cout << BOLD << B_CYAN << "Saving and Exiting..." << RESET << endl;
 }
 
 void invalidChoice()
 {
-    cout << BOLD << RED << "Invalid choice!!" << RESET << endl;
+    cout << BOLD << B_RED << "Invalid choice!!" << RESET << endl;
 }

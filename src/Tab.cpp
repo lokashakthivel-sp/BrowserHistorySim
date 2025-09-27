@@ -21,35 +21,35 @@ void Tab::visit(string url, string timeStamp)
     currentURL = url;
     // add to history
     history.add(url, timeStamp);
-    cout << "Visited: " << GREEN << currentURL << RESET << endl;
+    cout << "Visited: " << B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goBack()
 {
     if (backwardStack.isEmpty())
     {
-        cout << RED << "No previous page" << RESET << endl;
+        cout << B_RED << "No previous page" << RESET << endl;
         return;
     }
     // push currentURL to forwardStack
     forwardStack.push(currentURL);
     // set currentURL to top of backwardStack
     currentURL = backwardStack.pop();
-    cout << "Back to: " GREEN << currentURL << RESET << endl;
+    cout << "Back to: " <<B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goForward()
 {
     if (forwardStack.isEmpty())
     {
-        cout << RED << "No next page" << RESET << endl;
+        cout << B_RED << "No next page" << RESET << endl;
         return;
     }
     // push currentURL to backwardStack
     backwardStack.push(currentURL);
     // set currentURL to top of forwardStack
     currentURL = forwardStack.pop();
-    cout << "Forward to: " << GREEN << currentURL << RESET << endl;
+    cout << "Forward to: " << B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::openCurrentPage()
@@ -59,12 +59,12 @@ void Tab::openCurrentPage()
     {
         string cmd = "start " + currentURL;
         system(cmd.c_str());
-        cout << GREEN << currentURL << RESET << " opened in default browser" << endl;
+        cout << B_GREEN << currentURL << RESET << " opened in default browser" << endl;
     }
     // if not valid open a custom 404 html page by passing the invalid url to display there
     else
     {
-        cout << GREEN << currentURL << RED << " - Invalid url to open in browser" << RESET << endl;
+        cout << B_GREEN << currentURL << B_RED << " - Invalid url to open in browser" << RESET << endl;
     }
 }
 
@@ -95,7 +95,7 @@ void Tab::closeCurrentPage()
 {
     if (currentURL == "")
     {
-        cout << RED << "No page visited" << RESET << endl;
+        cout << B_RED << "No page visited" << RESET << endl;
         return;
     }
     // delete in history dll

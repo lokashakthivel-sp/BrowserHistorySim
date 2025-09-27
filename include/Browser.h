@@ -10,7 +10,7 @@ private:
     static const int MAX_TABS_COUNT = 3;
     // each elt in tabs array is a pair containing a Tab * and a bool value saying if it is open or not
     std::array<std::pair<Tab *, bool>, MAX_TABS_COUNT> tabs;
-    // currentTabIndex will be 1 based index
+    // currentTabIndex is 1 based index
     int currentTabIndex;
     int tabCount = 0;
 
@@ -29,10 +29,12 @@ public:
     void goForward();
     void showHistory();
     void openPage();
+    
+    void printBrowser();
 
     void saveHistory();
     void clearHistory();
     void loadHistory();
-    Tab *getCurrentTab();
+    Tab *getCurrentTab(int);
     int getTabCount();
 };
