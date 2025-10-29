@@ -20,8 +20,28 @@ void Tab::visit(string url, string timeStamp)
     // set currentURL
     currentURL = url;
     // add to history
-    history.add(url, timeStamp);
-    cout << "Visited: " << B_GREEN << currentURL << RESET << endl;
+    history.add(currentURL, timeStamp);
+    cout << "Visited new page: " << B_GREEN << currentURL << RESET << endl;
+}
+
+void Tab::searchPage(string targetURL, AVL &tree)
+{
+    Node *found = tree.searchVal(targetURL);
+    if (found == nullptr)
+    {
+        cout << B_RED << "Searched Page not found!" << RESET << endl;
+        return;
+    }
+    if (!currentURL.empty())
+    {
+        backwardStack.push(currentURL);
+        forwardStack.clear();
+    }
+
+    currentURL = "www." + found->data;
+
+    history.add(currentURL, "");
+    cout << "Visited searched page: " << B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goBack()
@@ -35,7 +55,7 @@ void Tab::goBack()
     forwardStack.push(currentURL);
     // set currentURL to top of backwardStack
     currentURL = backwardStack.pop();
-    cout << "Back to: " <<B_GREEN << currentURL << RESET << endl;
+    cout << "Back to: " << B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goForward()
@@ -65,6 +85,8 @@ void Tab::openCurrentPage()
     else
     {
         cout << B_GREEN << currentURL << B_RED << " - Invalid url to open in browser" << RESET << endl;
+        string cmd = "start ./default-page/defaultPage.html";
+        system(cmd.c_str());
     }
 }
 
@@ -74,20 +96,17 @@ bool Tab::isValidURL(const string &url)
     {
         return false;
     }
-
     // must not contain spaces
     if (url.find(' ') != string::npos)
     {
         return false;
     }
-
     // must follow the standard url pattern
     regex pattern("^(https?://)?(www\\.)?[a-zA-Z0-9]+\\.[a-z]{2,}(/.*)?$");
     if (regex_match(url, pattern))
     {
         return true;
     }
-
     return false;
 }
 

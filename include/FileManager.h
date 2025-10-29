@@ -1,5 +1,6 @@
 #pragma once
 #include "Tab.h"
+#include "AVL.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -12,4 +13,6 @@ public:
     // set to static so it can be accessed without object
     static void saveHistory(Tab *);
     static void loadHistory(Tab *);
+
+    static void createAVLfromURL(AVL &tree);
 };

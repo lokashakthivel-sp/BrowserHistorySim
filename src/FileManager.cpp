@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "FileManager.h"
+
 using namespace std;
 
 // filename is of format history/tab1.txt
@@ -65,4 +66,20 @@ void FileManager::loadHistory(Tab *tab)
     if (flag)
         cout << B_CYAN << "History loaded" << RESET << endl;
     file.close();
+}
+
+void FileManager::createAVLfromURL(AVL &tree)
+{
+    string filename = "urls/urlList.csv";
+    ifstream file(filename);
+    if(!file)
+    {
+        cout << B_RED << "URL file not found";
+        return;
+    }
+    string url;
+    while(getline(file,url))
+    {
+        tree.insertVal(url);
+    }
 }

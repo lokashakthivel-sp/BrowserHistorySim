@@ -1,6 +1,7 @@
 #pragma once
 #include "Stack.h"
 #include "HistoryList.h"
+#include "AVL.h"
 // template for tab obj
 class Tab
 {
@@ -15,6 +16,7 @@ public:
     Tab(int id);
     ~Tab();
     void visit(std::string url, std::string timeStamp);
+    void searchPage(std::string targetURL, AVL &tree);
     void goBack();
     void goForward();
     void openCurrentPage();

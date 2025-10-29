@@ -40,7 +40,6 @@ int getIDFromUser()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return 0;
     }
-    cout << endl;
     return id;
 }
 
@@ -53,10 +52,13 @@ int getIDFromUser()
     return timeStr;
 } */
 
-string getURLFromUser()
+string getURLFromUser(int flag)
 {
     string url;
-    cout << B_YELLOW << "    Enter the url: " << RESET;
+    if (flag == 0)
+        cout << B_YELLOW << "    Enter the url of new page to visit: " << RESET;
+    else if (flag == 1)
+        cout << B_YELLOW << "    Enter the keyword of page to search: " << RESET;
     cin >> url;
     cout << endl;
     return url;
@@ -70,4 +72,8 @@ void exitPrg()
 void invalidChoice()
 {
     cout << BOLD << B_RED << "Invalid choice!!" << RESET << endl;
+}
+
+void searchURL(string targetURL)
+{
 }

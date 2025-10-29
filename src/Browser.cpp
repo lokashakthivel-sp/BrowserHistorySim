@@ -2,9 +2,15 @@
 #include <iomanip>
 #include "Browser.h"
 #include "FileManager.h"
+#include "AVL.h"
 using namespace std;
 
-Browser::Browser() : currentTabIndex(-1) {}
+AVL tree;
+
+Browser::Browser() : currentTabIndex(-1)
+{
+    FileManager::createAVLfromURL(tree);
+}
 Browser::~Browser()
 {
     for (pair<Tab *, bool> tab : tabs)
@@ -109,7 +115,7 @@ void Browser::closeTab(int index)
         currentTabIndex = tabCount;
     } */
 
-    cout << "Closed Tab " << index << currentTabIndex << tabCount << endl;
+    cout << "Closed Tab " << index << endl;
 }
 
 Tab *Browser::getCurrentTab(int flag = 0)
@@ -127,6 +133,16 @@ void Browser::visitPage(string url, string timeStamp)
         return;
     }
     getCurrentTab()->visit(url, timeStamp);
+}
+
+void Browser::searchPage(string targetURL)
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << B_RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    getCurrentTab()->searchPage(targetURL, tree);
 }
 
 void Browser::closePage()
@@ -254,7 +270,7 @@ void Browser::printBrowser()
     if (currentTabIndex <= 0)
         return;
 
-    cout << "\n"
+    cout << "\n\n"
          << B_MAGENTA << repeat1("-", 50) << "\n"
          << "|" << RESET;
 

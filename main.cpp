@@ -9,6 +9,7 @@ vector<string> options = {
     "Close Tab",
     "Display Tabs",
     "Visit Page",
+    "Search Page",
     "Open Page in Browser",
     "Back - Previous Page",
     "Forward - Next Page",
@@ -54,39 +55,43 @@ int main()
             browser.printBrowser();
             break;
         case 5:
-            browser.visitPage(getURLFromUser(), "");
+            browser.visitPage(getURLFromUser(0), "");
             browser.printBrowser();
             break;
         case 6:
-            browser.openPage();
+            browser.searchPage(getURLFromUser(1));
             browser.printBrowser();
             break;
         case 7:
-            browser.goBack();
+            browser.openPage();
             browser.printBrowser();
             break;
         case 8:
-            browser.goForward();
+            browser.goBack();
             browser.printBrowser();
             break;
         case 9:
-            browser.closePage();
+            browser.goForward();
             browser.printBrowser();
             break;
         case 10:
-            browser.showHistory();
+            browser.closePage();
             browser.printBrowser();
             break;
         case 11:
-            browser.clearHistory();
+            browser.showHistory();
             browser.printBrowser();
             break;
         case 12:
+            browser.clearHistory();
+            browser.printBrowser();
+            break;
+        case 13:
             exitPrg();
             browser.saveHistory();
             break;
         default:
             invalidChoice();
         }
-    } while (choice != 12);
+    } while (choice != 13);
 }
