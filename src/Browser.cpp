@@ -80,6 +80,14 @@ void Browser::closeTab(int index)
         cout << B_RED << "Invalid tab index" << RESET << endl;
         return;
     }
+
+    if (currentTabIndex == index)
+    {
+        cout << B_RED << "Switch to some other tab to close current tab" << RESET << endl;
+        return;
+    }
+
+    // save history before closing
     FileManager::saveHistory(tabs[index - 1].first);
 
     // delete specified tab content
@@ -92,37 +100,15 @@ void Browser::closeTab(int index)
     {
         currentTabIndex = -1;
     }
-    if (currentTabIndex == index)
-    {
-        if (currentTabIndex == MAX_TABS_COUNT)
-        {
-            int i = currentTabIndex;
-            while (i > 0)
-            {
-                if (tabs[i].second == 1)
-                    currentTabIndex = tabs[i].first->getTabID();
-                i--;
-            }
-        }
-        else
-        {
-            currentTabIndex = (tabs.empty()) ? -1 : min(index + 1, (int)MAX_TABS_COUNT);
-        }
-    }
-    // when closeing last tab the currentIndex should be before tab??
-    /* if (tabCount < currentTabIndex)
-    {
-        currentTabIndex = tabCount;
-    } */
 
-    cout << "Closed Tab " << index << endl;
+    cout << "Closed Tab " << index << "current: " << currentTabIndex << endl;
 }
 
 Tab *Browser::getCurrentTab(int flag = 0)
 {
     if (!flag)
         cout << "Current Tab " << B_GREEN << currentTabIndex << RESET << endl;
-    return (currentTabIndex == -1) ? nullptr : tabs[currentTabIndex - 1].first;
+    return (currentTabIndex <= 0) ? nullptr : tabs[currentTabIndex - 1].first;
 }
 
 void Browser::visitPage(string url, string timeStamp)

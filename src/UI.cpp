@@ -26,7 +26,6 @@ void printMenu(vector<string> &options, int width)
     }
 
     cout << BOLD << B_BLUE << ":" << repeat(".", width - 2) << ":" << RESET << "\n";
-    cout << B_YELLOW << "Choice: " << RESET;
 }
 
 int getIDFromUser()

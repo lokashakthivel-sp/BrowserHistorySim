@@ -21,12 +21,13 @@ vector<string> options = {
 int main()
 {
     Browser browser;
-    // browser.createTab();
-    int choice;
+    int choice, count = 0;
     do
     {
-        // browser.displayTabs();
-        printMenu(options);
+        if (count % 3 == 0)
+            printMenu(options);
+        count++;
+        cout << B_YELLOW << "Choice: " << RESET;
         cin >> choice;
         if (cin.fail())
         {
@@ -39,7 +40,6 @@ int main()
         {
         case 1:
             browser.createTab();
-            // browser.loadHistory();
             browser.printBrowser();
             break;
         case 2:
