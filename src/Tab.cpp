@@ -26,8 +26,8 @@ void Tab::visit(string url, string timeStamp)
 
 void Tab::searchPage(string targetURL, AVL &tree)
 {
-    Node *found = tree.searchVal(targetURL);
-    if (found == nullptr)
+    vector<Node *> foundList = tree.searchVal(targetURL);
+    if (foundList.empty())
     {
         cout << B_RED << "Searched Page not found!" << RESET << endl;
         return;
@@ -38,10 +38,21 @@ void Tab::searchPage(string targetURL, AVL &tree)
         forwardStack.clear();
     }
 
-    currentURL = "www." + found->data;
+    for (size_t i = 0; i < foundList.size(); i++)
+        cout << " " << i + 1 << ". " << foundList[i]->data << endl;
 
+    size_t choice;
+    cout << B_YELLOW << "Enter choice of the URL to visit: ";
+    cin >> choice;
+    cout << RESET;
+    if (choice > foundList.size())
+    {
+        cout << B_RED << "Choice out of bounds!" << RESET << endl;
+        return;
+    }
+    currentURL = "www." + foundList[choice - 1]->data;
     history.add(currentURL, "");
-    cout << "Visited searched page: " << B_GREEN << currentURL << RESET << endl;
+    cout << "\nVisited searched page: " << B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goBack()

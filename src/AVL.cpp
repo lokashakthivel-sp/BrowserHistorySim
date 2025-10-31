@@ -1,6 +1,13 @@
 // #pragma once
 #include "AVL.h"
 #include <iostream>
+// for string comparison
+#include <algorithm>
+
+AVL::AVL()
+{
+    root = nullptr;
+}
 
 int max(const int &a, const int &b)
 {
@@ -109,33 +116,32 @@ Node *AVL::insert(std::string x, Node *t)
     return t;
 }
 
-Node *AVL::search(std::string x, Node *t)
+std::vector<Node *> AVL::search(std::string x, Node *t, std::vector<Node *> &matchingURL)
 {
     if (t == nullptr)
-        return nullptr;
+        return matchingURL;
 
-    //! string comparison
-    if (x == t->data)
-        return t;
-    else if (t->data > x)
-        return search(x, t->left);
+    if (t->data.find(x) != std::string::npos)
+    {
+        matchingURL.push_back(t);
+    }
+    if (t->data > x)
+        return search(x, t->left, matchingURL);
     else
-        return search(x, t->right);
+        return search(x, t->right, matchingURL);
 }
 
-AVL::AVL()
-{
-    root = nullptr;
-}
 void AVL::insertVal(std::string x)
 {
     root = insert(x, root);
 }
 
-Node *AVL::searchVal(std::string x)
+std::vector<Node *> AVL::searchVal(std::string x)
 {
-    Node *found = search(x, root);
-    return found;
+    transform(x.begin(), x.end(), x.begin(), ::tolower);
+    std::vector<Node *> matchingURL;
+    return search(x, root, matchingURL);
+    ;
 }
 
 void AVL::displayInorder(Node *root)

@@ -3,6 +3,7 @@
 #include <iostream>
 #include "UI.h"
 using namespace std;
+
 vector<string> options = {
     "Create Tab",
     "Switch Tab",
@@ -17,7 +18,7 @@ vector<string> options = {
     "Show History",
     "Clear History",
     "Save and Exit"};
-// add closing a current page function
+
 int main()
 {
     Browser browser;

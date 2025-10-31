@@ -10,6 +10,7 @@ AVL tree;
 Browser::Browser() : currentTabIndex(-1)
 {
     FileManager::createAVLfromURL(tree);
+    tree.displayInorder(tree.root);
 }
 Browser::~Browser()
 {
