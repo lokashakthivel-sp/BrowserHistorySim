@@ -5,19 +5,27 @@
 #include "AVL.h"
 using namespace std;
 
-AVL tree;
-
 Browser::Browser() : currentTabIndex(-1)
 {
     FileManager::createAVLfromURL(tree);
-    tree.displayInorder(tree.root);
+    // tree.displayInorder(tree.root);
+    FileManager::loadBookmarks(Browser::bookmarkList);
 }
+
 Browser::~Browser()
 {
     for (pair<Tab *, bool> tab : tabs)
     {
         delete tab.first;
     }
+}
+
+bool getIsPrivateTab()
+{
+    string choice;
+    cout << B_YELLOW << "    Is the tab private?(y/n): " << RESET;
+    cin >> choice;
+    return (choice == "y" || choice == "Y") ? true : false;
 }
 
 void Browser::createTab()
@@ -34,7 +42,7 @@ void Browser::createTab()
         // if tab is not opened
         if (!tabs[i].second)
         {
-            tabs[i].first = new Tab(i + 1);
+            tabs[i].first = new Tab(i + 1, getIsPrivateTab());
             tabs[i].second = 1;
             currentTabIndex = i + 1;
             tabCount++;
@@ -207,8 +215,57 @@ void Browser::displayTabs()
         {
             cout << RESET << "  ";
         }
+        //! print is the tab is private or not
         cout << "Tab " << tabs[i].first->getTabID() << " Current URL: " << (tabs[i].first->getCurrentURL().empty() ? "..." : tabs[i].first->getCurrentURL()) << endl;
     }
+}
+
+void Browser::addBookmark()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << B_RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    string url = getCurrentTab(1)->getCurrentURL();
+    if (url == "")
+    {
+        cout << B_RED << "No pages visited currently" << RESET << endl;
+        return;
+    }
+    FileManager::addBookmark(url);
+    bookmarkList.push_back(url);
+    cout << B_GREEN << "Current page added to Bookmarks";
+}
+
+void Browser::showBookmark()
+{
+    if (bookmarkList.empty())
+    {
+        cout << B_RED << "No bookmarks created" << RESET << endl;
+        return;
+    }
+    cout << B_CYAN << "Bookmarks" << RESET << endl;
+    for (size_t i = 0; i < bookmarkList.size(); i++)
+    {
+        cout << "    " << i + 1 << ". " << bookmarkList[i] << endl;
+    }
+    cout << endl;
+}
+
+void Browser::openBookmarkPage()
+{
+    if (currentTabIndex <= 0)
+    {
+        cout << B_RED << "No open tabs" << RESET << endl;
+        return;
+    }
+    if (bookmarkList.empty())
+    {
+        cout << B_RED << "No bookmark present" << RESET << endl;
+        return;
+    }
+    getCurrentTab(1)->openBookmarkPage(bookmarkList);
 }
 
 // for use in fileManager
@@ -221,11 +278,10 @@ void Browser::saveHistory()
 {
     for (int i = 0; i < MAX_TABS_COUNT; i++)
     {
-        if (tabs[i].second == 0)
+        if (tabs[i].second == 1 && !tabs[i].first->getIsPrivate())
         {
-            continue;
+            FileManager::saveHistory(tabs[i].first);
         }
-        FileManager::saveHistory(tabs[i].first);
     }
 }
 
@@ -270,10 +326,16 @@ void Browser::printBrowser()
     for (int i = 0; i < MAX_TABS_COUNT; i++)
     {
         if (i + 1 == currentTabIndex)
-            cout << "\033[47;95m";
+        {
+            if (tabs[i].first->getIsPrivate())
+                cout << "\033[100;95m";
+            else
+                cout << "\033[47;95m";
+        }
         if (tabs[i].second == 1)
         {
-
+            if (tabs[i].first->getIsPrivate())
+                cout << "\033[90m";
             cout << BOLD << " Tab " << tabs[i].first->getTabID() << " " << RESET << B_CYAN << " | " << RESET;
             widthAfterTab3 -= 10;
         }

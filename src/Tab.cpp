@@ -6,7 +6,7 @@
 #include <regex>
 using namespace std;
 
-Tab::Tab(int id) : currentURL(""), tabID(id) {}
+Tab::Tab(int id, bool isPrivate) : currentURL(""), tabID(id), isPrivate(isPrivate) {}
 Tab::~Tab() {}
 
 void Tab::visit(string url, string timeStamp)
@@ -42,7 +42,7 @@ void Tab::searchPage(string targetURL, AVL &tree)
         cout << " " << i + 1 << ". " << foundList[i]->data << endl;
 
     size_t choice;
-    cout << B_YELLOW << "Enter choice of the URL to visit: ";
+    cout << B_YELLOW << "    Enter choice of the URL to visit: ";
     cin >> choice;
     cout << RESET;
     if (choice > foundList.size())
@@ -53,6 +53,25 @@ void Tab::searchPage(string targetURL, AVL &tree)
     currentURL = "www." + foundList[choice - 1]->data;
     history.add(currentURL, "");
     cout << "\nVisited searched page: " << B_GREEN << currentURL << RESET << endl;
+}
+
+void Tab::openBookmarkPage(vector<string> &bookmarkList)
+{
+    for (size_t i = 0; i < bookmarkList.size(); i++)
+    {
+        cout << i + 1 << ". " << bookmarkList[i] << endl;
+    }
+    size_t choice;
+    cout << B_YELLOW << "    Enter choice of URL to open: " << RESET;
+    cin >> choice;
+    if (choice > bookmarkList.size())
+    {
+        cout << B_RED << "Choice out of bounds!" << RESET << endl;
+        return;
+    }
+    currentURL = bookmarkList[choice - 1];
+    history.add(currentURL, "");
+    cout << "Visited bookmarked page: " << B_GREEN << currentURL << RESET << endl;
 }
 
 void Tab::goBack()
@@ -169,4 +188,9 @@ HistoryNode *Tab::getHistoryHead()
 string Tab::getCurrentURL()
 {
     return currentURL;
+}
+
+bool Tab::getIsPrivate()
+{
+    return isPrivate;
 }

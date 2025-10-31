@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 
-// to save and load history of each tab from separate files
 class FileManager
 {
 public:
@@ -15,4 +14,7 @@ public:
     static void loadHistory(Tab *);
 
     static void createAVLfromURL(AVL &tree);
+    static void loadBookmarks(std::vector<std::string> &bookmarkList);
+
+    static void addBookmark(std::string url);
 };

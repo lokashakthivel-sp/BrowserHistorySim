@@ -14,5 +14,3 @@ int getIDFromUser();
 string getURLFromUser(int flag);
 void exitPrg();
 void invalidChoice();
-
-void searchURL(string targetURL);

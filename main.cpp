@@ -14,6 +14,9 @@ vector<string> options = {
     "Open Page in Browser",
     "Back - Previous Page",
     "Forward - Next Page",
+    "Bookmark Current Page",
+    "Show Bookmarks",
+    "Open Bookmarked Page",
     "Close Current Page",
     "Show History",
     "Clear History",
@@ -41,58 +44,56 @@ int main()
         {
         case 1:
             browser.createTab();
-            browser.printBrowser();
             break;
         case 2:
             browser.switchTab(getIDFromUser());
-            browser.printBrowser();
             break;
         case 3:
             browser.closeTab(getIDFromUser());
-            browser.printBrowser();
             break;
         case 4:
             browser.displayTabs();
-            browser.printBrowser();
             break;
         case 5:
             browser.visitPage(getURLFromUser(0), "");
-            browser.printBrowser();
             break;
         case 6:
             browser.searchPage(getURLFromUser(1));
-            browser.printBrowser();
             break;
         case 7:
             browser.openPage();
-            browser.printBrowser();
             break;
         case 8:
             browser.goBack();
-            browser.printBrowser();
             break;
         case 9:
             browser.goForward();
-            browser.printBrowser();
             break;
         case 10:
-            browser.closePage();
-            browser.printBrowser();
+            browser.addBookmark();
             break;
         case 11:
-            browser.showHistory();
-            browser.printBrowser();
-            break;
+            browser.showBookmark();
+            break;    
         case 12:
-            browser.clearHistory();
-            browser.printBrowser();
+            browser.openBookmarkPage();
             break;
         case 13:
+            browser.closePage();
+            break;
+        case 14:
+            browser.showHistory();
+            break;
+        case 15:
+            browser.clearHistory();
+            break;
+        case 16:
             exitPrg();
             browser.saveHistory();
             break;
         default:
             invalidChoice();
         }
-    } while (choice != 13);
+        browser.printBrowser();
+    } while (choice != 15);
 }

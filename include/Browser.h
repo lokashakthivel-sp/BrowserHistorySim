@@ -10,6 +10,8 @@ private:
     static const int MAX_TABS_COUNT = 3;
     // each elt in tabs array is a pair containing a Tab * and a bool value saying if it is open or not
     std::array<std::pair<Tab *, bool>, MAX_TABS_COUNT> tabs;
+    AVL tree;
+    std::vector<std::string> bookmarkList;
     // currentTabIndex is 1 based index
     int currentTabIndex;
     int tabCount = 0;
@@ -36,6 +38,11 @@ public:
     void saveHistory();
     void clearHistory();
     void loadHistory();
+
+    void addBookmark();
+    void showBookmark();
+    void openBookmarkPage();
+
     Tab *getCurrentTab(int);
     int getTabCount();
 };

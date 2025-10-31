@@ -72,14 +72,40 @@ void FileManager::createAVLfromURL(AVL &tree)
 {
     string filename = "urls/urlList.csv";
     ifstream file(filename);
-    if(!file)
+    if (!file)
     {
         cout << B_RED << "URL file not found";
         return;
     }
     string url;
-    while(getline(file,url))
+    while (getline(file, url))
     {
         tree.insertVal(url);
     }
+}
+
+void FileManager::loadBookmarks(std::vector<std::string> &bookmarkList)
+{
+    std::ifstream file("bookmark/bookmark.txt");
+    if (!file)
+    {
+        cout << B_RED << "Could not open bookmark.txt" << RESET << endl;
+        return;
+    }
+    std::string url;
+    while (getline(file, url))
+    {
+        bookmarkList.push_back(url);
+    }
+}
+
+void FileManager::addBookmark(std::string url)
+{
+    std::ofstream file("bookmark/bookmark.txt", std::ios::app);
+    if (!file)
+    {
+        cout << B_RED << "Could not open bookmark.txt" << RESET << endl;
+        return;
+    }
+    file << url << endl;
 }
