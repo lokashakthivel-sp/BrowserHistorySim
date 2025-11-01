@@ -293,9 +293,25 @@ void Browser::clearHistory()
         cout << B_RED << "No open tabs" << RESET << endl;
         return;
     }
-    Tab *tempTab = getCurrentTab();
-    tempTab->clearHistory(1);
-    FileManager::saveHistory(tempTab);
+    int choice;
+    cout << B_YELLOW << "Do you want to clear history of all tabs(1) or current tab alone(2)? " << RESET;
+    cin >> choice;
+    if (choice == 1)
+    {
+        for (int i = 0; i < MAX_TABS_COUNT; i++)
+        {
+            if (tabs[i].second == 1)
+            {
+                tabs[i].first->clearHistory(1);
+                FileManager::saveHistory(tabs[i].first);
+            }
+        }
+    }
+    else if (choice == 2)
+    {
+        getCurrentTab(1)->clearHistory(1);
+        FileManager::saveHistory(getCurrentTab(1));
+    }
 }
 
 string repeat1(string s, int count)
