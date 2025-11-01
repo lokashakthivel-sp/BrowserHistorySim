@@ -74,7 +74,7 @@ int main()
             break;
         case 11:
             browser.showBookmark();
-            break;    
+            break;
         case 12:
             browser.openBookmarkPage();
             break;
@@ -94,6 +94,7 @@ int main()
         default:
             invalidChoice();
         }
-        browser.printBrowser();
-    } while (choice != 15);
+        if (choice != 16)
+            browser.printBrowser();
+    } while (choice != 16);
 }
