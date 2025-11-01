@@ -19,6 +19,7 @@ Browser::~Browser()
     {
         delete tab.first;
     }
+    delete bookmarkList;
 }
 
 bool getIsPrivateTab()

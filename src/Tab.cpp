@@ -7,7 +7,13 @@
 using namespace std;
 
 Tab::Tab(int id, bool isPrivate) : currentURL(""), tabID(id), isPrivate(isPrivate) {}
-Tab::~Tab() {}
+Tab::~Tab()
+{
+    for (Page *p : pages)
+    {
+        delete p;
+    }
+}
 
 void Tab::visit(string url, string timeStamp)
 {
@@ -53,7 +59,7 @@ void Tab::searchPage(string targetURL, AVL &tree)
     }
     currentURL = "www." + foundPages[choice - 1].getURL();
     history.add(currentURL, "");
-    pages.push_back(&foundPages[choice - 1]);
+    pages.push_back(new Page(foundPages[choice - 1]));
     cout << "\nVisited searched page: " << B_GREEN << currentURL << RESET << endl;
 }
 
