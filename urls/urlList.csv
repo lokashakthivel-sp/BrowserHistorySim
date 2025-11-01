@@ -1,232 +1,106 @@
-google.com
-youtube.com
-facebook.com
-instagram.com
-chatgpt.com
-wikipedia.org
-reddit.com
-x.com
-whatsapp.com
-bing.com
-amazon.com
-yahoo.com
-duckduckgo.com
-tiktok.com
-weather.com
-flipkart.com
-meeso.com
-zomato.com
-geekforgeeks.com
-live.com
-fandom.com
-linkedin.com
-netflix.com
-tumblr.com
-telegram.com
-pinterest.com
-twitch.tv
-openai.com
-naver.com
-office.com
-canva.com
-vk.com
-paypal.com
-aliexpress.com
-discord.com
-github.com
-spotify.com
-apple.com
-imdb.com
-bilibili.com
-roblox.com
-globo.com
-nytimes.com
-microsoft.com
-samsung.com
-mail.ru
-ebay.com
-quora.com
-walmart.com
-bbc.com
-booking.com
-espn.com
-brave.com
-cnn.com
-indeed.com
-zoom.us
-adobe.com
-usps.com
-cricbuzz.com
-accuweather.com
-etsy.com
-steampowered.com
-shopify.com
-steamcommunity.com
-ecosia.org
-infobae.com
-disneyplus.com
-theguardian.com
-googleusercontent.com
-dailymotion.com
-primevideo.com
-zillow.com
-dailymail.co.uk
-linktree.ee
-people.com
-instructure.com
-shein.com
-max.com
-wildberries.ru
-avito.ru
-blogspot.com
-wordpress.org
-cloudflare.com
-youtu.be
-europa.eu
-mozilla.org
-vimeo.com
-medium.com
-line.me
-cpanel.net
-w3.org
-who.int
-myspace.com
-gravatar.com
-wikimedia.org
-stackoverflow.com
-stackexchange.com
-news.com
-arxiv.org
-semanticscholar.org
-researchgate.net
-sciencedirect.com
-nature.com
-sciencemag.org
-pubmed.ncbi.nlm.nih.gov
-techcrunch.com
-theverge.com
-wired.com
-engadget.com
-arstechnica.com
-cnet.com
-zdnet.com
-tomshardware.com
-gsmarena.com
-anandtech.com
-android.com
-macrumors.com
-androidauthority.com
-target.com
-bestbuy.com
-ikea.com
-costco.com
-alibaba.com
-craigslist.org
-olx.com
-snapchat.com
-meetup.com
-patreon.com
-hulu.com
-vudu.com
-khanacademy.org
-coursera.org
-udemy.com
-edx.org
-codecademy.com
-freecodecamp.org
-stripe.com
-venmo.com
-reuters.com
-bloomberg.com
-forbes.com
-washingtonpost.com
-politico.com
-cnbc.com
-marketwatch.com
-godaddy.com
-namecheap.com
-digitalocean.com
-heroku.com
-stackblitz.com
-codepen.io
-codesandbox.io
-replit.com
-gitlab.com
-bitbucket.org
-npmjs.com
-pypi.org
-crates.io
-maven.org
-tinyurl.com
-bit.ly
-usnews.com
-apnews.com
-aljazeera.com
-theatlantic.com
-slate.com
-vice.com
-buzzfeed.com
-mashable.com
-airbnb.com
-uber.com
-yelp.com
-tripadvisor.com
-kayak.com
-hotels.com
-priceline.com
-trivago.com
-skyscanner.net
-trulia.com
-zillowgroup.com
-glassdoor.com
-monster.com
-ziprecruiter.com
-webmd.com
-mayoclinic.org
-healthline.com
-chase.com
-bankofamerica.com
-wellsfargo.com
-capitalone.com
-robinhood.com
-coinbase.com
-binance.com
-kraken.com
-slack.com
-notion.so
-trello.com
-asana.com
-airtable.com
-dropbox.com
-box.com
-dev.to
-developer.mozilla.org
-archive.org
-gutenberg.org
-scribd.com
-metacritic.com
-pandora.com
-soundcloud.com
-bandcamp.com
-crunchyroll.com
-funimation.com
-epicgames.com
-gog.com
-ea.com
-ubisoft.com
-bleacherreport.com
-rottentomatoes.com
-time.com
-economist.com
-pewresearch.org
-deepl.com
-dictionary.com
-thesaurus.com
-mercari.com
-groupon.com
-wish.com
-carousell.com
-sketchfab.com
-codeshare.io
-glitch.com
-realtor.com
+google.com,Google,Search the world’s information including webpages, images and more.  
+youtube.com,YouTube,Share your videos with friends, family and the world.  
+facebook.com,Facebook,Connect with friends and the world around you on Facebook.  
+instagram.com,Instagram,Share photos and stories to connect with followers and friends.  
+chatgpt.com,ChatGPT,Interact with an AI chatbot for conversation and assistance.  
+wikipedia.org,Wikipedia,Free encyclopedia where you can read about anything.  
+reddit.com,Reddit,Community-driven discussion site with posts and upvotes across topics.  
+x.com,X (formerly Twitter),Social media platform for short messages and real-time conversations.  
+whatsapp.com,WhatsApp,Messaging app to send text, voice, video and images globally.  
+bing.com,Bing,Microsoft’s search engine for web searches, images, videos and news.  
+amazon.com,Amazon,Global e-commerce marketplace for products, electronics, books and more.  
+yahoo.com,Yahoo,Web portal offering search, mail, news and more.  
+duckduckgo.com,DuckDuckGo,Search engine focused on privacy with no tracking.  
+tiktok.com,TikTok,Short-form mobile videos for creative expression and social sharing.  
+weather.com,Weather.com,Weather forecasts, radar maps and climate news for your location.  
+flipkart.com,Flipkart,Indian e-commerce site selling electronics, fashion, home goods and more.  
+meeso.com,Meeso,[General shopping & deals website].  
+zomato.com,Zomato,Restaurant search, reviews and food delivery service in many cities.  
+geekforgeeks.com,GeeksforGeeks,Programming tutorials, algorithms and data-structures resource.  
+live.com,Live.com,Microsoft’s online portal for mail, docs, account management and more.  
+fandom.com,Fandom,Wikipedia-style community wiki platform for pop culture, games and TV.  
+linkedin.com,LinkedIn,Professional network for careers, jobs and business connections.  
+netflix.com,Netflix,Streaming service for movies, TV series and original content.  
+tumblr.com,Tumblr,Blogging and social network for multimedia and creative posts.  
+telegram.com,Telegram,Cloud-based messaging and calls with strong encryption and channels.  
+pinterest.com,Pinterest,Visual discovery platform for ideas, inspirations and projects.  
+twitch.tv,Twitch,Live streaming platform especially for gam­ing, esports and creators.  
+openai.com,OpenAI,Research organisation building AI models and tools like ChatGPT.  
+naver.com,Naver,Korean web portal with search, news, email and more.  
+office.com,Office.com,Microsoft’s web portal for Office apps and online productivity tools.  
+canva.com,Canva,Online design tool for graphics, presentations and social media assets.  
+vk.com,VK,Popular Russian social network offering messaging, communities and multimedia.  
+paypal.com,PayPal,Digital payments platform for sending and receiving money online.  
+aliexpress.com,AliExpress,Global retail marketplace from China offering low-cost goods.  
+discord.com,Discord,Voice, video and text chat platform popular with gaming and communities.  
+github.com,GitHub,Web-based Git repository hosting for software version control and collaboration.  
+spotify.com,Spotify,Music streaming service with songs, playlists and podcasts.  
+apple.com,Apple,Official site of Apple Inc. for products, services and support.  
+imdb.com,IMDb,Internet Movie Database — film, TV and celebrity info database.  
+bilibili.com,Bilibili,Chinese video sharing platform popular with anime, games and community content.  
+roblox.com,Roblox,Online platform for games created by users and game-playing.  
+globo.com,Globo,Major Brazilian media company portal with news, TV and more.  
+nytimes.com,The New York Times,Major US news outlet covering global current events.  
+microsoft.com,Microsoft,Official site for Microsoft products, services and support.  
+samsung.com,Samsung,Official site of Samsung Electronics offering devices and information.  
+mail.ru,Mail.ru,Major Russian web portal for email, news, social networks and more.  
+ebay.com,eBay,Online auction & shopping site where you can buy and sell items worldwide.  
+quora.com,Quora,Question-and-answer platform where users share knowledge and experiences.  
+walmart.com,Walmart,Large US retailer’s online store for groceries, electronics, home goods and more.  
+bbc.com,BBC,British Broadcasting Corporation’s news and media platform with global coverage.  
+booking.com,Booking.com,Travel site for booking hotels, flights and vacation rentals.  
+espn.com,ESPN,Sports news, live scores, commentary and streaming from around the world.  
+target.com,Target,Large U.S. retailer offering general merchandise, electronics, clothing and home goods.  
+bestbuy.com,Best Buy,Electronics and appliance retail chain with online and physical store presence.  
+ikea.com,IKEA,Global home furnishings retailer known for Swedish-design, affordable furniture and self-assembly.  
+costco.com,Costco,Membership warehouse club selling groceries, electronics and bulk items at discounted prices.  
+alibaba.com,Alibaba,Chinese e-commerce giant connecting global buyers and sellers, wholesale and retail.  
+craigslist.org,Craigslist,Online classifieds platform for jobs, housing, items for sale, services and community.  
+olx.com,OLX,Online marketplace chiefly for local classified ads in emerging markets – buy/sell used goods.  
+snapchat.com,Snapchat,Multimedia messaging app where messages disappear after viewing and users share stories.  
+meetup.com,Meetup,Platform for organizing and attending local gatherings, events and interest-based groups.  
+patreon.com,Patreon,Membership platform for creators to earn subscription income from their fans.  
+hulu.com,Hulu,Streaming service offering TV shows, movies and original content on demand in U.S. market.  
+vudu.com,Vudu,Digital video-on-demand service offering movie rentals and purchases online.  
+khanacademy.org,Khan Academy,Free online educational resource offering lessons in math, science, programming and more.  
+coursera.org,Coursera,Massive open online course (MOOC) platform providing university-level courses and certificates.  
+udemy.com,Udemy,Online learning marketplace where instructors create and sell courses on varied topics.  
+edx.org,edX,Non-profit online course provider founded by MIT and Harvard offering free and paid courses.  
+codecademy.com,Codecademy,Interactive platform for learning coding and programming languages.  
+freecodecamp.org,freeCodeCamp,Free coding curriculum with interactive tutorials, projects and certifications in web development.  
+stripe.com,Stripe,Online payments infrastructure provider that enables businesses to accept digital payments.  
+venmo.com,Venmo,Peer-to-peer mobile payments app often used for splitting bills and sending money friends.  
+reuters.com,Reuters,Global news agency offering real-time news, analysis and multimedia content.  
+bloomberg.com,Bloomberg,Business and finance news outlet with data, analytics, video and market-coverage services.  
+forbes.com,Forbes,Media company covering business, investing, technology, entrepreneurship and lifestyles.  
+washingtonpost.com,The Washington Post,Major U.S. newspaper with national and international news, politics and analysis.  
+politico.com,Politico,Political journalism organisation covering U.S. and global politics, policy and power.  
+cnbc.com,CNBC,Business news channel and website providing live market coverage, corporate news and investing information.  
+marketwatch.com,MarketWatch,Financial news website giving stock market data, investing articles and commentary.  
+godaddy.com,GoDaddy,Domain registrar and web hosting company offering website building tools and small business services.  
+namecheap.com,Namecheap,Domain registration and hosting provider focused on budget features and user-friendly management.  
+digitalocean.com,DigitalOcean,Cloud infrastructure provider offering virtual servers (droplets) and developer-friendly tools.  
+heroku.com,Heroku,Platform as a service (PaaS) enabling developers to deploy, manage and scale web applications in cloud.  
+stackblitz.com,StackBlitz,Online code editor and development environment for web developers to build apps in browser.  
+codepen.io,CodePen,Code sandbox and social development environment where programmers share front-end code snippets.  
+codesandbox.io,CodeSandbox,Online IDE for building web apps with live previews and collaborative capabilities.  
+replit.com,Replit,Browser-based development platform allowing coding in many languages and real-time collaboration.  
+gitlab.com,GitLab,Web-based DevOps lifecycle tool including Git repository hosting, CI/CD, issue tracking and more.  
+bitbucket.org,Bitbucket,Git and Mercurial repository management service owned by Atlassian for source code hosting.  
+npmjs.com,NPM Registry,Package manager repository for the JavaScript ecosystem and Node.js modules.  
+pypi.org,PyPI,The Python Package Index — repository of software packages for Python programming language.  
+crates.io,Crates.io,Rust programming language’s package registry housing open-source crates.  
+maven.org,Maven Central,Repository of Java libraries and build artifacts for Java developers.  
+tinyurl.com,TinyURL,URL shortening service that converts long links into shorter, easier to share links.  
+bit.ly,Bit.ly,Popular link-shortening service with analytics for managing shortened URLs.  
+usnews.com,US News,Publisher of rankings, analysis and reports in education, health, markets and news.  
+apnews.com,AP News,Associated Press website delivering breaking news, feature stories, photo and video from around the world.  
+aljazeera.com,Al Jazeera,Global news network based in Qatar offering news, opinions and documentaries across regions.  
+theatlantic.com,The Atlantic,Magazine and online platform for news, politics, culture and ideas.  
+slate.com,Slate,Slate, Digital magazine covering politics, news, technology, culture and podcasts.  
+vice.com,Vice,Media company focused on youth-oriented news, culture, arts and investigative journalism.  
+buzzfeed.com,BuzzFeed,Digital media company producing entertainment, news, lists, quizzes and viral content.  
+mashable.com,Mashable,Digital media site covering social media, technology, entertainment and culture.  
+airbnb.com,Airbnb,Online marketplace for lodging, vacation rentals and tourism experiences around the world.  
+uber.com,Uber,Technology company offering ride-hailing, food delivery and mobility services globally.  
+yelp.com,Yelp,Platform for discovering and reviewing local businesses and services with user-submitted ratings.  

@@ -77,10 +77,17 @@ void FileManager::createAVLfromURL(AVL &tree)
         cout << B_RED << "URL file not found";
         return;
     }
-    string url;
-    while (getline(file, url))
+    string line;
+    while (getline(file, line))
     {
-        tree.insertVal(url);
+        stringstream ss(line);
+        string url, title, content;
+        getline(ss, url, ',');
+        getline(ss, title, ',');
+        getline(ss, content, ',');
+
+        Page newPage(url, title, content);
+        tree.insertVal(newPage);
     }
 }
 

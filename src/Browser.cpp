@@ -8,7 +8,7 @@ using namespace std;
 Browser::Browser() : currentTabIndex(-1)
 {
     FileManager::createAVLfromURL(tree);
-    // tree.displayInorder(tree.root);
+    tree.displayInorder(tree.root);
     bookmarkList = new LinkedList();
     FileManager::loadBookmarks(Browser::bookmarkList);
 }
@@ -361,6 +361,16 @@ void Browser::printBrowser()
          << "|" << repeat1("-", 48) << "|" << "\n"
          << "|" << RESET;
 
+    cout << " Title: ";
+    string title = "...";
+    if (!getCurrentTab(1)->pages.empty())
+    {
+        title = getCurrentTab(1)->pages.back()->getTitle();
+    }
+    cout << title << setw(45 - title.length()) << B_MAGENTA << "|\n";
+
+    cout << "|" << repeat1("-", 48) << "|\n|" << RESET;
+
     cout << " URL: ";
     string url = getCurrentTab(1)->getCurrentURL();
     if (url.empty())
@@ -371,7 +381,24 @@ void Browser::printBrowser()
     cout << B_BLUE << url
          << setw(47 - url.length()) << B_MAGENTA << "|" << "\n";
 
-    cout << "|" << repeat1("-", 48) << "|\n|";
+    cout << "|" << repeat1("-", 48) << "|\n|" << RESET;
+
+    cout << " Content: ";
+    string content = "...";
+    if (!getCurrentTab(1)->pages.empty())
+    {
+        content = getCurrentTab(1)->pages.back()->getContent();
+    }
+    cout << content;
+    if (content == "...")
+        cout << setw(40);
+    else if (content == "Page Content")
+        cout << setw(31);
+
+    cout << B_MAGENTA << "|\n|";
+
+    cout << repeat1("-", 48) << "|\n|";
+
     cout << " History"
          << setw(42) << "|\n";
     getCurrentTab(1)->showHistory();
@@ -382,6 +409,6 @@ void Browser::printBrowser()
 
 void Browser::loadHistory()
 {
-    cout << B_CYAN << "Loading History..." << RESET;
+    cout << B_CYAN << "Loading History..." << RESET << endl;
     FileManager::loadHistory(getCurrentTab(1));
 }

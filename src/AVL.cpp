@@ -9,15 +9,29 @@ AVL::AVL()
     root = nullptr;
 }
 
+AVL::~AVL()
+{
+    destroy(root);
+    root = nullptr;
+}
+
+void AVL::destroy(Node *t)
+{
+    if (t == nullptr)
+        return;
+    destroy(t->left);
+    destroy(t->right);
+    delete t;
+}
+
 int max(const int &a, const int &b)
 {
     return (a < b) ? b : a;
 }
 
-Node *AVL::createNode(std::string x)
+Node *AVL::createNode(Page newPage)
 {
-    Node *newNode = new Node();
-    newNode->data = x;
+    Node *newNode = new Node(newPage);
     newNode->height = 0;
     newNode->left = newNode->right = nullptr;
 
@@ -62,24 +76,24 @@ Node *AVL::leftRotate(Node *k2)
     return k1;
 }
 
-Node *AVL::insert(std::string x, Node *t)
+Node *AVL::insert(Page newPage, Node *t)
 {
     if (t == nullptr)
     {
-        t = createNode(x);
+        t = createNode(newPage);
         return t;
     }
     else
     {
-        if (t->data > x)
+        if (t->page.getURL() > newPage.getURL())
         {
             // insert into left side of t
-            t->left = insert(x, t->left);
+            t->left = insert(newPage, t->left);
             // if property violated we check if the x is placed in the left or right of the //* left child
             if (height(t->left) - height(t->right) == 2)
             {
                 // if inserted into //* left of left child
-                if (t->left->data > x)
+                if (t->left->page.getURL() > newPage.getURL())
                     t = rightRotate(t);
                 // if inserted into //* right of left child
                 else
@@ -91,15 +105,15 @@ Node *AVL::insert(std::string x, Node *t)
                 }
             }
         }
-        else if (t->data < x)
+        else if (t->page.getURL() < newPage.getURL())
         {
             // insert into right side of t
-            t->right = insert(x, t->right);
+            t->right = insert(newPage, t->right);
             // if property violated we check if the x is placed in the left or right of the //* right child
             if (height(t->right) - height(t->left) == 2)
             {
                 // if inserted into //* right of right child
-                if (t->right->data < x)
+                if (t->right->page.getURL() < newPage.getURL())
                     t = leftRotate(t);
                 // if inserted into //* left of right child
                 else
@@ -116,30 +130,30 @@ Node *AVL::insert(std::string x, Node *t)
     return t;
 }
 
-LinkedList *AVL::search(std::string x, Node *t, LinkedList *matchingURL)
+std::vector<Page> AVL::search(std::string x, Node *t, std::vector<Page> &matchingURL)
 {
     if (t == nullptr)
         return matchingURL;
 
-    if (t->data.find(x) != std::string::npos)
+    if (t->page.getURL().find(x) != std::string::npos)
     {
-        matchingURL->insertAtEnd(t->data);
+        matchingURL.push_back(t->page);
     }
-    if (t->data > x)
+    if (t->page.getURL() > x)
         return search(x, t->left, matchingURL);
     else
         return search(x, t->right, matchingURL);
 }
 
-void AVL::insertVal(std::string x)
+void AVL::insertVal(Page newPage)
 {
-    root = insert(x, root);
+    root = insert(newPage, root);
 }
 
-LinkedList *AVL::searchVal(std::string x)
+std::vector<Page> AVL::searchVal(std::string x)
 {
     transform(x.begin(), x.end(), x.begin(), ::tolower);
-    LinkedList *matchingURL = new LinkedList();
+    std::vector<Page> matchingURL;
     return search(x, root, matchingURL);
     ;
 }
@@ -149,6 +163,6 @@ void AVL::displayInorder(Node *root)
     if (root == nullptr)
         return;
     displayInorder(root->left);
-    std::cout << root->data << " ";
+    std::cout << root->page.getURL() << " " << root->page.getTitle() << root->page.getContent();
     displayInorder(root->right);
 }

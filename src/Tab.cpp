@@ -19,6 +19,7 @@ void Tab::visit(string url, string timeStamp)
     }
     // set currentURL
     currentURL = url;
+    pages.push_back(new Page(url));
     // add to history
     history.add(currentURL, timeStamp);
     cout << "Visited new page: " << B_GREEN << currentURL << RESET << endl;
@@ -26,8 +27,8 @@ void Tab::visit(string url, string timeStamp)
 
 void Tab::searchPage(string targetURL, AVL &tree)
 {
-    LinkedList *foundList = tree.searchVal(targetURL);
-    if (foundList->isEmpty())
+    vector<Page> foundPages = tree.searchVal(targetURL);
+    if (foundPages.empty())
     {
         cout << B_RED << "Searched Page not found!" << RESET << endl;
         return;
@@ -38,20 +39,21 @@ void Tab::searchPage(string targetURL, AVL &tree)
         forwardStack.clear();
     }
 
-    for (int i = 0; i < foundList->getSize(); i++)
-        cout << " " << i + 1 << ". " << foundList->getURLAtIndex(i) << endl;
+    for (size_t i = 0; i < foundPages.size(); i++)
+        cout << " " << i + 1 << ". " << foundPages[i].getURL() << endl;
 
-    int choice;
+    size_t choice;
     cout << B_YELLOW << "    Enter choice of the URL to visit: ";
     cin >> choice;
     cout << RESET;
-    if (choice > foundList->getSize())
+    if (choice > foundPages.size())
     {
         cout << B_RED << "Choice out of bounds!" << RESET << endl;
         return;
     }
-    currentURL = "www." + foundList->getURLAtIndex(choice - 1);
+    currentURL = "www." + foundPages[choice - 1].getURL();
     history.add(currentURL, "");
+    pages.push_back(&foundPages[choice - 1]);
     cout << "\nVisited searched page: " << B_GREEN << currentURL << RESET << endl;
 }
 

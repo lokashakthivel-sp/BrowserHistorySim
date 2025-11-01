@@ -1,4 +1,5 @@
 #pragma once
+#include "Page.h"
 #include "Stack.h"
 #include "HistoryList.h"
 #include "AVL.h"
@@ -14,11 +15,12 @@ private:
     bool isPrivate;
 
 public:
+    std::vector<Page *> pages;
     Tab(int id, bool isPrivate);
     ~Tab();
     void visit(std::string url, std::string timeStamp);
     void searchPage(std::string targetURL, AVL &tree);
-    void openBookmarkPage(LinkedList* bookmarkList);
+    void openBookmarkPage(LinkedList *bookmarkList);
     void goBack();
     void goForward();
     void openCurrentPage();
