@@ -26,8 +26,8 @@ void Tab::visit(string url, string timeStamp)
 
 void Tab::searchPage(string targetURL, AVL &tree)
 {
-    vector<Node *> foundList = tree.searchVal(targetURL);
-    if (foundList.empty())
+    LinkedList *foundList = tree.searchVal(targetURL);
+    if (foundList->isEmpty())
     {
         cout << B_RED << "Searched Page not found!" << RESET << endl;
         return;
@@ -38,38 +38,38 @@ void Tab::searchPage(string targetURL, AVL &tree)
         forwardStack.clear();
     }
 
-    for (size_t i = 0; i < foundList.size(); i++)
-        cout << " " << i + 1 << ". " << foundList[i]->data << endl;
+    for (int i = 0; i < foundList->getSize(); i++)
+        cout << " " << i + 1 << ". " << foundList->getURLAtIndex(i) << endl;
 
-    size_t choice;
+    int choice;
     cout << B_YELLOW << "    Enter choice of the URL to visit: ";
     cin >> choice;
     cout << RESET;
-    if (choice > foundList.size())
+    if (choice > foundList->getSize())
     {
         cout << B_RED << "Choice out of bounds!" << RESET << endl;
         return;
     }
-    currentURL = "www." + foundList[choice - 1]->data;
+    currentURL = "www." + foundList->getURLAtIndex(choice - 1);
     history.add(currentURL, "");
     cout << "\nVisited searched page: " << B_GREEN << currentURL << RESET << endl;
 }
 
-void Tab::openBookmarkPage(vector<string> &bookmarkList)
+void Tab::openBookmarkPage(LinkedList *bookmarkList)
 {
-    for (size_t i = 0; i < bookmarkList.size(); i++)
+    for (int i = 0; i < bookmarkList->getSize(); i++)
     {
-        cout << i + 1 << ". " << bookmarkList[i] << endl;
+        cout << i + 1 << ". " << bookmarkList->getURLAtIndex(i) << endl;
     }
-    size_t choice;
+    int choice;
     cout << B_YELLOW << "    Enter choice of URL to open: " << RESET;
     cin >> choice;
-    if (choice > bookmarkList.size())
+    if (choice > bookmarkList->getSize())
     {
         cout << B_RED << "Choice out of bounds!" << RESET << endl;
         return;
     }
-    currentURL = bookmarkList[choice - 1];
+    currentURL = bookmarkList->getURLAtIndex(choice - 1);
     history.add(currentURL, "");
     cout << "Visited bookmarked page: " << B_GREEN << currentURL << RESET << endl;
 }

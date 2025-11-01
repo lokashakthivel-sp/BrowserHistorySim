@@ -18,7 +18,7 @@ public:
     ~Tab();
     void visit(std::string url, std::string timeStamp);
     void searchPage(std::string targetURL, AVL &tree);
-    void openBookmarkPage(std::vector<std::string> &bookmarkList);
+    void openBookmarkPage(LinkedList* bookmarkList);
     void goBack();
     void goForward();
     void openCurrentPage();

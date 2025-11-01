@@ -11,7 +11,7 @@ private:
     // each elt in tabs array is a pair containing a Tab * and a bool value saying if it is open or not
     std::array<std::pair<Tab *, bool>, MAX_TABS_COUNT> tabs;
     AVL tree;
-    std::vector<std::string> bookmarkList;
+    LinkedList* bookmarkList;
     // currentTabIndex is 1 based index
     int currentTabIndex;
     int tabCount = 0;

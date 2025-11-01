@@ -9,6 +9,7 @@ Browser::Browser() : currentTabIndex(-1)
 {
     FileManager::createAVLfromURL(tree);
     // tree.displayInorder(tree.root);
+    bookmarkList = new LinkedList();
     FileManager::loadBookmarks(Browser::bookmarkList);
 }
 
@@ -137,7 +138,7 @@ void Browser::searchPage(string targetURL)
         cout << B_RED << "No open tabs" << RESET << endl;
         return;
     }
-    getCurrentTab()->searchPage(targetURL, tree);
+    getCurrentTab(1)->searchPage(targetURL, tree);
 }
 
 void Browser::closePage()
@@ -234,21 +235,21 @@ void Browser::addBookmark()
         return;
     }
     FileManager::addBookmark(url);
-    bookmarkList.push_back(url);
+    bookmarkList->insertAtEnd(url);
     cout << B_GREEN << "Current page added to Bookmarks";
 }
 
 void Browser::showBookmark()
 {
-    if (bookmarkList.empty())
+    if (bookmarkList->isEmpty())
     {
         cout << B_RED << "No bookmarks created" << RESET << endl;
         return;
     }
     cout << B_CYAN << "Bookmarks" << RESET << endl;
-    for (size_t i = 0; i < bookmarkList.size(); i++)
+    for (int i = 0; i < bookmarkList->getSize(); i++)
     {
-        cout << "    " << i + 1 << ". " << bookmarkList[i] << endl;
+        cout << "    " << i + 1 << ". " << bookmarkList->getURLAtIndex(i) << endl;
     }
     cout << endl;
 }
@@ -260,7 +261,7 @@ void Browser::openBookmarkPage()
         cout << B_RED << "No open tabs" << RESET << endl;
         return;
     }
-    if (bookmarkList.empty())
+    if (bookmarkList->isEmpty())
     {
         cout << B_RED << "No bookmark present" << RESET << endl;
         return;
@@ -365,5 +366,6 @@ void Browser::printBrowser()
 
 void Browser::loadHistory()
 {
-    FileManager::loadHistory(getCurrentTab());
+    cout << B_CYAN << "Loading History..." << RESET;
+    FileManager::loadHistory(getCurrentTab(1));
 }

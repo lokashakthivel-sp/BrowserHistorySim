@@ -116,14 +116,14 @@ Node *AVL::insert(std::string x, Node *t)
     return t;
 }
 
-std::vector<Node *> AVL::search(std::string x, Node *t, std::vector<Node *> &matchingURL)
+LinkedList *AVL::search(std::string x, Node *t, LinkedList *matchingURL)
 {
     if (t == nullptr)
         return matchingURL;
 
     if (t->data.find(x) != std::string::npos)
     {
-        matchingURL.push_back(t);
+        matchingURL->insertAtEnd(t->data);
     }
     if (t->data > x)
         return search(x, t->left, matchingURL);
@@ -136,10 +136,10 @@ void AVL::insertVal(std::string x)
     root = insert(x, root);
 }
 
-std::vector<Node *> AVL::searchVal(std::string x)
+LinkedList *AVL::searchVal(std::string x)
 {
     transform(x.begin(), x.end(), x.begin(), ::tolower);
-    std::vector<Node *> matchingURL;
+    LinkedList *matchingURL = new LinkedList();
     return search(x, root, matchingURL);
     ;
 }

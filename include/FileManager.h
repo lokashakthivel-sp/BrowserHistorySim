@@ -1,6 +1,7 @@
 #pragma once
 #include "Tab.h"
 #include "AVL.h"
+#include "LinkedList.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -14,7 +15,7 @@ public:
     static void loadHistory(Tab *);
 
     static void createAVLfromURL(AVL &tree);
-    static void loadBookmarks(std::vector<std::string> &bookmarkList);
+    static void loadBookmarks(LinkedList* bookmarkList);
 
     static void addBookmark(std::string url);
 };

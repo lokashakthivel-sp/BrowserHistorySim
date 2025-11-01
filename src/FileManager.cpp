@@ -84,7 +84,7 @@ void FileManager::createAVLfromURL(AVL &tree)
     }
 }
 
-void FileManager::loadBookmarks(std::vector<std::string> &bookmarkList)
+void FileManager::loadBookmarks(LinkedList *bookmarkList)
 {
     std::ifstream file("bookmark/bookmark.txt");
     if (!file)
@@ -95,7 +95,7 @@ void FileManager::loadBookmarks(std::vector<std::string> &bookmarkList)
     std::string url;
     while (getline(file, url))
     {
-        bookmarkList.push_back(url);
+        bookmarkList->insertAtEnd(url);
     }
 }
 

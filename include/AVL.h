@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "LinkedList.h"
 struct Node
 {
     std::string data;
@@ -19,13 +20,13 @@ private:
     Node *leftRotate(Node *k2);
 
     Node *insert(std::string x, Node *t);
-    std::vector<Node *> search(std::string x, Node *t, std::vector<Node *> &matchingURL);
+    LinkedList* search(std::string x, Node *t, LinkedList* matchingURL);
 
 public:
     Node *root;
     AVL();
 
     void insertVal(std::string x);
-    std::vector<Node *> searchVal(std::string x);
+    LinkedList* searchVal(std::string x);
     void displayInorder(Node *root);
 };
